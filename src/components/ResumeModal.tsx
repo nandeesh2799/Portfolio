@@ -124,7 +124,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             </div>
 
             <a
-              href="/resumes/Nandeesh_NK_Resume_AI.pdf"
+              href="./resumes/Nandeesh_NK_Resume_AI.pdf"
               download="Nandeesh_NK_Resume_AI.pdf"
               target="_blank"
               rel="noopener noreferrer"
@@ -160,7 +160,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             </div>
 
             <a
-              href="/resumes/Nandeesh_NK_Resume.pdf"
+              href="./resumes/Nandeesh_NK_Resume.pdf"
               download="Nandeesh_NK_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"

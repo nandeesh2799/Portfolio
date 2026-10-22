@@ -410,13 +410,13 @@ export const InteractiveLab: React.FC<InteractiveLabProps> = ({ initialDemo = 's
 
   // Map emotions to actual sprite filenames in /images/aria/
   const getAriaAvatarSrc = (emotion: AriaEmotion, isSpeakingState: boolean) => {
-    if (isSpeakingState) return '/images/aria/mouth_a.png';
+    if (isSpeakingState) return './images/aria/mouth_a.png';
     switch (emotion) {
-      case 'happy': return '/images/aria/emotion_happy.png';
-      case 'thinking': return '/images/aria/emotion_thinking.png';
-      case 'smug': return '/images/aria/emotion_smug.png';
-      case 'excited': return '/images/aria/emotion_excited.png';
-      default: return '/images/aria/idle.png';
+      case 'happy': return './images/aria/emotion_happy.png';
+      case 'thinking': return './images/aria/emotion_thinking.png';
+      case 'smug': return './images/aria/emotion_smug.png';
+      case 'excited': return './images/aria/emotion_excited.png';
+      default: return './images/aria/idle.png';
     }
   };
 

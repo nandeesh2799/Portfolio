@@ -190,7 +190,7 @@ export const ArtStudio: React.FC = () => {
         <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-dark-900 via-dark-950 to-dark-900 border border-slate-800 flex flex-col sm:flex-row items-center gap-6">
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-amber-500/30 flex-shrink-0 shadow-lg">
             <img 
-              src="/images/portrait.jpg" 
+              src="./images/portrait.jpg" 
               alt="Nandeesh N K Studio Portrait" 
               className="w-full h-full object-cover" 
             />

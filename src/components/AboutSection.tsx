@@ -39,7 +39,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenResumeModal })
             <div className="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl bg-dark-900 group">
               <div className="aspect-[3/4] w-full overflow-hidden bg-dark-950">
                 <img
-                  src="/images/portrait.jpg"
+                  src="./images/portrait.jpg"
                   alt="Nandeesh Narayan Kurubar in studio with artwork and creative tools"
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
