@@ -105,7 +105,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResumeModal, onExploreWork }) 
                 onClick={onExploreWork}
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-400 to-emerald-400 text-dark-950 hover:shadow-[0_0_25px_rgba(0,242,254,0.35)] transition-all transform hover:-translate-y-0.5"
               >
-                <span>Explore Selected Work</span>
+                <span>Explore Projects</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -114,7 +114,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResumeModal, onExploreWork }) 
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium bg-dark-900/90 text-cyan-300 border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-950/30 transition-all"
               >
                 <Sparkles className="w-4 h-4 text-cyan-400" />
-                <span>Interactive Lab Demos</span>
+                <span>Try Lab Demos</span>
               </a>
 
               <button
@@ -122,14 +122,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResumeModal, onExploreWork }) 
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-mono text-slate-300 bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 hover:text-white transition-all"
               >
                 <FileDown className="w-4 h-4 text-emerald-400" />
-                <span>Resume (PDF)</span>
+                <span>Download Resume</span>
               </button>
 
               <a
                 href="https://github.com/nandeesh2799"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 text-slate-300 hover:text-white transition-all"
+                className="p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 text-slate-300 hover:text-white transition-colors"
                 aria-label="Nandeesh's GitHub Profile"
               >
                 <Github className="w-5 h-5" />

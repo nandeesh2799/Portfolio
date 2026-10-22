@@ -15,7 +15,7 @@ import {
 
 export const ArtStudio: React.FC = () => {
   const [selectedMedium, setSelectedMedium] = useState<'all' | 'paint' | 'sketch' | 'wall' | 'fabric'>('all');
-  const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
+  const [activeArtworkId, setActiveArtworkId] = useState<string | null>(null);
 
   const mediumFilters = [
     { id: 'all', label: 'All Works (8)' },
@@ -30,36 +30,43 @@ export const ArtStudio: React.FC = () => {
     return art.category === selectedMedium;
   });
 
+  const activeArt = activeArtworkId !== null 
+    ? (filteredArtworks.find((a) => a.id === activeArtworkId) || artworksData.find((a) => a.id === activeArtworkId) || null)
+    : null;
+
+  const activeArtworkIndex = activeArt ? filteredArtworks.findIndex((a) => a.id === activeArt.id) : -1;
+
   const openLightbox = (id: string) => {
-    const idx = artworksData.findIndex((a) => a.id === id);
-    if (idx !== -1) setActiveLightboxIndex(idx);
+    setActiveArtworkId(id);
   };
 
-  const closeLightbox = () => setActiveLightboxIndex(null);
+  const closeLightbox = () => setActiveArtworkId(null);
 
   const prevArtwork = () => {
-    if (activeLightboxIndex !== null) {
-      setActiveLightboxIndex((prev) => (prev! > 0 ? prev! - 1 : artworksData.length - 1));
-    }
+    if (filteredArtworks.length === 0) return;
+    const currentIdx = activeArt ? filteredArtworks.findIndex((a) => a.id === activeArt.id) : -1;
+    const prevIdx = currentIdx > 0 ? currentIdx - 1 : filteredArtworks.length - 1;
+    setActiveArtworkId(filteredArtworks[prevIdx].id);
   };
 
   const nextArtwork = () => {
-    if (activeLightboxIndex !== null) {
-      setActiveLightboxIndex((prev) => (prev! < artworksData.length - 1 ? prev! + 1 : 0));
-    }
+    if (filteredArtworks.length === 0) return;
+    const currentIdx = activeArt ? filteredArtworks.findIndex((a) => a.id === activeArt.id) : -1;
+    const nextIdx = currentIdx < filteredArtworks.length - 1 ? currentIdx + 1 : 0;
+    setActiveArtworkId(filteredArtworks[nextIdx].id);
   };
 
   // Lightbox keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (activeLightboxIndex === null) return;
+      if (!activeArt) return;
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') prevArtwork();
       if (e.key === 'ArrowRight') nextArtwork();
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    if (activeLightboxIndex !== null) {
+    if (activeArt) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -69,9 +76,7 @@ export const ArtStudio: React.FC = () => {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [activeLightboxIndex]);
-
-  const activeArt = activeLightboxIndex !== null ? artworksData[activeLightboxIndex] : null;
+  }, [activeArt, filteredArtworks]);
 
   return (
     <section id="art-studio" className="py-24 relative overflow-hidden">
@@ -260,7 +265,7 @@ export const ArtStudio: React.FC = () => {
                     {activeArt.category}
                   </span>
                   <span className="text-slate-500">
-                    Artwork {activeLightboxIndex! + 1} of {artworksData.length}
+                    Artwork {activeArtworkIndex + 1} of {filteredArtworks.length}
                   </span>
                 </div>
 

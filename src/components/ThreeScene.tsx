@@ -90,6 +90,9 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
     const ringGroup = new THREE.Group();
     rootGroup.add(ringGroup);
 
+    const ringGeometries: THREE.BufferGeometry[] = [];
+    const ringMaterials: THREE.Material[] = [];
+
     const createRing = (radius: number, tube: number, color: number, rotX: number, rotY: number) => {
       const ringGeo = new THREE.TorusGeometry(radius, tube, 16, 100);
       const ringMat = new THREE.MeshBasicMaterial({
@@ -97,6 +100,8 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
         transparent: true,
         opacity: 0.6,
       });
+      ringGeometries.push(ringGeo);
+      ringMaterials.push(ringMat);
       const ringMesh = new THREE.Mesh(ringGeo, ringMat);
       ringMesh.rotation.x = rotX;
       ringMesh.rotation.y = rotY;
@@ -175,6 +180,7 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
       mouseX = x * 0.45;
@@ -271,13 +277,17 @@ export const ThreeScene: React.FC<ThreeSceneProps> = ({ className = '' }) => {
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
 
-      if (container && renderer.domElement) {
+      if (container && renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
       coreGeometry.dispose();
       coreMaterial.dispose();
       wireframeMaterial.dispose();
+      innerNucleusGeo.dispose();
+      innerNucleusMat.dispose();
+      ringGeometries.forEach((g) => g.dispose());
+      ringMaterials.forEach((m) => m.dispose());
       particleGeometry.dispose();
       particleMaterial.dispose();
     };

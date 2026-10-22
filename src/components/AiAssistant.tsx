@@ -51,43 +51,23 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({
   const generateResponse = async (userQuery: string): Promise<{ text: string; action?: ChatMessage['suggestedAction'] }> => {
     const q = userQuery.toLowerCase();
 
-    // Check if an external Gemini API key is configured
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    if (apiKey) {
+    // Optional secure backend proxy support (never expose raw API keys in client bundles)
+    const proxyEndpoint = import.meta.env.VITE_AI_PROXY_ENDPOINT;
+    if (proxyEndpoint) {
       try {
-        const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [
-                {
-                  parts: [
-                    {
-                      text: `You are an AI portfolio assistant for Nandeesh Narayan Kurubar.
-Strict Truth Guidelines:
-- Nandeesh is a BCA graduate (2026) from Christ Academy Institute for Advanced Studies, Bengaluru.
-- Key Projects: StockBridge (React 19, Node.js, Express, MongoDB, Groq LLaMA 3.3 POS), Aria (Electron, React, Vite, Ollama, Whisper STT, Piper TTS, SQLite vector memory), Chargeback & Dispute Copilot (FastAPI, Scikit-learn explainable ML, React), ResumeRank AI (FastAPI, all-MiniLM-L6-v2, SSE streaming), UPS Service Manager (Flutter, Dart, Firebase), OCR Payment Extraction Pipeline (Python, PyMuPDF, Tesseract).
-- Art: Physical artist working in oil/watercolour paint, graphite sketches, lime plaster wall murals, and pigment on fabric.
-- Contact: nandeeshnk506@gmail.com, +91 78927 26438, github.com/nandeesh2799.
-- NEVER invent employers, fake years of experience, or unverified claims. Answer concisely and professionally.
-
-User question: ${userQuery}`
-                    }
-                  ]
-                }
-              ]
-            })
+        const response = await fetch(proxyEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userQuery })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (data?.reply) {
+            return { text: data.reply, action: data.action };
           }
-        );
-        const data = await response.json();
-        const geminiText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (geminiText) {
-          return { text: geminiText };
         }
       } catch {
-        // Fall back to rule-based engine
+        // Fall back seamlessly to local deterministic engine
       }
     }
 
@@ -103,6 +83,20 @@ User question: ${userQuery}`
       return {
         text: "Aria is a transparent desktop AI companion built in Electron and React. It operates 100% offline using local Ollama models (LLaMA 3.1), Whisper.cpp for speech-to-text, Piper for speech synthesis, and SQLite for persistent vector memory via cosine similarity lookups.",
         action: { label: 'Inspect Aria in Lab', actionType: 'navigate', target: 'laboratory' }
+      };
+    }
+
+    if (q.includes('ups') || q.includes('technician') || q.includes('service manager')) {
+      return {
+        text: "UPS Service Manager is a production-style field service technician mobile application built with Flutter & Dart. It features offline-first data caching via Hive, Cloud Firestore real-time sync, multi-step service order intake, equipment diagnostics (battery voltage & load testing), warranty tracking, and PDF invoice generation with WhatsApp alerts.",
+        action: { label: 'Launch UPS Service Demo', actionType: 'navigate', target: 'laboratory' }
+      };
+    }
+
+    if (q.includes('chargeback') || q.includes('dispute') || q.includes('copilot') || q.includes('fraud')) {
+      return {
+        text: "Chargeback & Dispute Copilot is an autonomous fintech rebuttal system built with Python FastAPI and React 18. It features an explainable Scikit-learn logistic regression win-probability model, a 10-step AI audit agent that reconciles merchant evidence (POD, OTP, AVS, IP logs), and generates dual rebuttals: a strict <=1000 char Razorpay API summary and a formal Card Brand Representation Letter.",
+        action: { label: 'Open Dispute Copilot Lab', actionType: 'navigate', target: 'laboratory' }
       };
     }
 

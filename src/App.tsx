@@ -20,13 +20,21 @@ export const App: React.FC = () => {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const [initialLabDemo, setInitialLabDemo] = useState<string>('stockbridge');
 
-  // Sync Audience filter with URL query parameter
+  // Sync Audience filter with URL query parameter & browser back/forward
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const viewParam = params.get('view') as AudienceFilterType;
-    if (viewParam && ['all', 'fullstack', 'ai', 'creative'].includes(viewParam)) {
-      setAudienceFilter(viewParam);
-    }
+    const syncFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      const viewParam = params.get('view') as AudienceFilterType;
+      if (viewParam && ['all', 'fullstack', 'ai', 'creative'].includes(viewParam)) {
+        setAudienceFilter(viewParam);
+      } else {
+        setAudienceFilter('all');
+      }
+    };
+
+    syncFromUrl();
+    window.addEventListener('popstate', syncFromUrl);
+    return () => window.removeEventListener('popstate', syncFromUrl);
   }, []);
 
   const handleFilterChange = (filter: AudienceFilterType) => {
@@ -37,7 +45,7 @@ export const App: React.FC = () => {
     } else {
       url.searchParams.set('view', filter);
     }
-    window.history.replaceState({}, '', url.toString());
+    window.history.pushState({}, '', url.toString());
   };
 
   const navigateToSection = (sectionId: string) => {

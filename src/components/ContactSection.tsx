@@ -38,7 +38,7 @@ export const ContactSection: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setErrorMessage('Please complete all required fields.');
@@ -48,13 +48,32 @@ export const ContactSection: React.FC = () => {
     setErrorMessage(null);
     setIsSubmitting(true);
 
-    // Simulated robust submission handler:
-    // If VITE_CONTACT_ENDPOINT is present, you would POST there.
-    // Otherwise, we provide instant confirmation and prompt mailto fallback.
+    const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT;
+    if (endpoint) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        if (!response.ok) {
+          throw new Error(`Submission failed with HTTP ${response.status}`);
+        }
+        setIsSubmitting(false);
+        setSubmitted(true);
+        return;
+      } catch (err) {
+        setIsSubmitting(false);
+        setErrorMessage('Live gateway unreachable. Use the direct email button below to open your mail client.');
+        return;
+      }
+    }
+
+    // Standard client fallback with direct mailto confirmation
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 800);
+    }, 600);
   };
 
   const triggerDirectMailto = () => {
