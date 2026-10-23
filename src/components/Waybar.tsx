@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Terminal, 
-  Cpu, 
-  HardDrive, 
   Clock, 
   Palette, 
   FileDown, 
@@ -31,7 +29,6 @@ export const Waybar: React.FC<WaybarProps> = ({
   activeSection
 }) => {
   const [time, setTime] = useState<string>('');
-  const [cpuUsage, setCpuUsage] = useState<number>(14);
 
   useEffect(() => {
     const updateClock = () => {
@@ -41,14 +38,6 @@ export const Waybar: React.FC<WaybarProps> = ({
     updateClock();
     const timer = setInterval(updateClock, 1000);
     return () => clearInterval(timer);
-  }, []);
-
-  // Fluctuate CPU slightly to simulate living system monitor
-  useEffect(() => {
-    const cpuTimer = setInterval(() => {
-      setCpuUsage(Math.floor(12 + Math.random() * 8));
-    }, 4000);
-    return () => clearInterval(cpuTimer);
   }, []);
 
   const workspaces = [
@@ -137,19 +126,6 @@ export const Waybar: React.FC<WaybarProps> = ({
             <Palette className="w-3.5 h-3.5" />
             <span className="hidden sm:inline text-[10px] text-muted capitalize">{currentTheme}</span>
           </button>
-
-          {/* System Telemetry (CPU & RAM) */}
-          <div className="hidden md:flex items-center gap-2 px-2 py-1 rounded bg-bg-secondary border border-bg-tertiary text-[11px] text-muted">
-            <div className="flex items-center gap-1">
-              <Cpu className="w-3 h-3 text-terminal-cyan" />
-              <span>{cpuUsage}%</span>
-            </div>
-            <span className="text-slate-600">|</span>
-            <div className="flex items-center gap-1">
-              <HardDrive className="w-3 h-3 text-terminal-purple" />
-              <span>4.1G</span>
-            </div>
-          </div>
 
           {/* Real-time Clock */}
           <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-bg-secondary border border-bg-tertiary text-slate-300 text-[11px]">
