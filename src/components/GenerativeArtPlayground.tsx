@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 /* ─── Artwork data ──────────────────────────────────────────── */
-type ArtCategory = 'All' | 'Paintings' | 'Sketches' | 'Fabric Art' | 'Wall Art';
+type ArtCategory = 'All' | 'Paintings' | 'Sketches' | 'Tattoo Art' | 'Wall Art';
 
 interface Artwork {
   id: string;
@@ -77,14 +77,14 @@ const artworks: Artwork[] = [
     description: 'A Bharatanatyam dancer frozen mid-pose on a pure black canvas — vibrant costume, precise mudra, and graceful balance.',
   },
 
-  // ── Fabric Art ─────────────────────────────────────────
+  // ── Tattoo Art ─────────────────────────────────────────
   {
-    id: 'agni-shiva-fabric',
-    src: '/images/artworks/agni-shiva-fabric.jpg',
-    title: 'Agni Shiva — Fabric Painting',
-    category: 'Fabric Art',
-    medium: 'Fabric / Textile Paint on Cotton',
-    description: 'Lord Shiva wielding the trishul, surrounded by roaring fire — painted with fabric pigments on a white cotton tee.',
+    id: 'agni-shiva-tattoo',
+    src: '/images/artworks/agni-shiva-tattoo.jpg',
+    title: 'Agni Shiva — Tattoo Art',
+    category: 'Tattoo Art',
+    medium: 'Tattoo Ink on Synthetic Fake Skin',
+    description: 'Lord Shiva wielding the trishul, surrounded by roaring fire — precision tattoo needlework and shading executed on practice fake skin.',
   },
 
   // ── Sketches ───────────────────────────────────────────
@@ -95,14 +95,6 @@ const artworks: Artwork[] = [
     category: 'Sketches',
     medium: 'Graphite Pencil on Cartridge Paper',
     description: 'A monumental graphite study — serene Shiva above and fierce Kali below — showcasing fine tonal gradation and anatomical detail.',
-  },
-  {
-    id: 'shiva-kali-sketch-2',
-    src: '/images/artworks/shiva-kali-sketch-2.jpg',
-    title: 'Shiva & Kali — Graphite II',
-    category: 'Sketches',
-    medium: 'Graphite Pencil on Cartridge Paper',
-    description: 'A second graphite rendering of the same dual composition, exploring alternate shading depth and compositional framing.',
   },
   {
     id: 'portrait-red-ink',
@@ -140,7 +132,7 @@ const artworks: Artwork[] = [
   },
 ];
 
-const CATEGORIES: ArtCategory[] = ['All', 'Paintings', 'Sketches', 'Fabric Art', 'Wall Art'];
+const CATEGORIES: ArtCategory[] = ['All', 'Paintings', 'Sketches', 'Tattoo Art', 'Wall Art'];
 
 /* ─── Generative canvas types ──────────────────────────────── */
 type PaletteKey = 'cyberpunk' | 'matrix' | 'aurora' | 'solar';
@@ -377,7 +369,7 @@ export const GenerativeArtPlayground: React.FC = () => {
               Art Studio
             </h2>
             <p className="text-muted text-sm sm:text-base font-mono">
-              Traditional artwork — paintings, sketches, fabric art, and wall murals — alongside a live generative canvas.
+              Original artwork — paintings, sketches, tattoo art on synthetic skin, and murals — alongside an interactive generative canvas.
             </p>
           </div>
 
