@@ -150,6 +150,11 @@ export const AboutSection: React.FC = () => {
                   <span className="text-terminal-pink font-semibold">{developerProfile.location}</span>
                 </div>
 
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between py-1.5 gap-1">
+                  <span className="text-muted">OS / Environment</span>
+                  <span className="text-terminal-cyan font-mono font-medium">Triple Boot · Zorin OS + Kali Linux + Windows</span>
+                </div>
+
                 <div className="py-2 space-y-1.5">
                   <span className="text-muted block">Core Technical Interests</span>
                   <div className="flex flex-wrap gap-1.5">

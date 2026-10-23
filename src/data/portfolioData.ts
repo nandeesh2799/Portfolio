@@ -4,14 +4,14 @@ export const developerProfile = {
   name: 'Nandeesh Narayan Kurubar',
   role: 'Full-Stack Developer & AI Engineer',
   tagline: 'A Linux-powered creative developer workspace — where code becomes art and ideas become real products.',
-  heroBio: "I build web and mobile applications, integrate AI/LLMs, and turn ideas into real products. I love coding, solving problems, exploring Linux, and creating things that combine technology with imagination.",
-  aboutBio: "I'm a BCA graduate (2026) with hands-on experience in MERN-stack development and LLM-integrated products. I've built a SaaS-style POS and inventory platform with an AI business assistant, and a local-first, multi-model desktop AI agent. I enjoy exploring the intersection of technology and creativity, where code meets imagination.",
+  heroBio: "I build web and mobile applications, integrate AI/LLMs, and turn ideas into real products. I love coding, solving problems, exploring Linux (maintaining a customized triple-boot setup with Zorin OS, Kali Linux, and Windows), and creating things that combine technology with imagination.",
+  aboutBio: "I'm a BCA graduate (2026) with hands-on experience in MERN-stack development and LLM-integrated products. I've built a SaaS-style POS and inventory platform with an AI business assistant, and a local-first, multi-model desktop AI agent. As a dedicated Linux enthusiast, I run and maintain a triple-boot workstation with Zorin OS and Kali Linux, exploring system architecture, security workflows, and creative computing.",
   location: 'Bengaluru, Karnataka, India',
   education: 'BCA, 2026 (Christ Academy Institute for Advanced Studies)',
   email: 'nandeeshnk506@gmail.com',
   github: 'https://github.com/nandeesh2799',
   linkedin: 'https://linkedin.com/in/nandeesh-n-k-729773270',
-  interests: ['Linux & Arch/Hyprland', 'AI Engineering', 'Full-Stack Development', 'Automation', 'Creative Coding', 'Digital Art'],
+  interests: ['Linux (Zorin OS & Kali Linux Triple Boot)', 'AI Engineering', 'Full-Stack Development', 'Automation', 'Creative Coding', 'Digital Art'],
   languages: [
     { name: 'English', level: 'Professional' },
     { name: 'Kannada', level: 'Native' },
@@ -129,9 +129,9 @@ export const skillGroups: SkillGroup[] = [
     ]
   },
   {
-    category: 'Tools',
+    category: 'Tools & Systems',
     icon: 'Wrench',
-    skills: ['Git', 'GitHub', 'VS Code', 'Android Studio', 'Jupyter Notebook', 'REST APIs']
+    skills: ['Linux (Zorin OS & Kali Linux)', 'Triple Boot Management', 'Git', 'GitHub', 'VS Code', 'Android Studio', 'Jupyter Notebook', 'REST APIs']
   }
 ];
 

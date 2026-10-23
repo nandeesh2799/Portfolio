@@ -10,12 +10,12 @@ export const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
   const [isDone, setIsDone] = useState(false);
 
   const bootMessages = [
-    'Initializing creative environment...',
+    'GRUB 2.06: Multi-boot loader initialized [Zorin OS | Kali Linux | Windows]...',
     'Loading developer profile: Nandeesh Narayan Kurubar...',
     'Mounting /projects [StockBridge, Aria, OCR, UPS]...',
     'Starting AI modules & LLM orchestration layers...',
-    'Initializing generative art engine & canvas pipeline...',
-    'Starting Hyprland Wayland compositor...',
+    'Initializing creative digital art gallery...',
+    'Starting Wayland desktop compositor...',
     'Loading digital workspace & terminal runtime...',
     'Welcome to NandeeshOS v2026. Ready.'
   ];

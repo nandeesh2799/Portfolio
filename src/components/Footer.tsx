@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Socials & Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-bg-tertiary/50">
           <p className="text-slate-400 text-center sm:text-left">
-            Crafted by <span className="text-white font-bold">{developerProfile.name}</span>. Built with Arch Linux mindset, React &amp; Tailwind.
+            Crafted by <span className="text-white font-bold">{developerProfile.name}</span>. Powered by Zorin OS, Kali Linux, React &amp; Tailwind.
           </p>
 
           <div className="flex items-center gap-4">
