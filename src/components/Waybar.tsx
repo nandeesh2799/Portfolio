@@ -96,16 +96,6 @@ export const Waybar: React.FC<WaybarProps> = ({
 
         {/* Right: Telemetry & Actions */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* User Avatar - System Tray Style */}
-          <div className="flex items-center gap-2 px-2 py-1 rounded bg-bg-secondary border border-bg-tertiary hover:border-terminal-green/50 transition-colors">
-            <img
-              src="/images/Avatar.png"
-              alt=""
-              className="w-7 h-7 rounded-full border-2 border-terminal-green/50 ring-2 ring-[#080B10] object-cover"
-            />
-            <span className="text-xs font-mono text-terminal-green hidden sm:inline">nand</span>
-          </div>
-
           {/* Quick Terminal Launch */}
           <button
             onClick={onOpenTerminal}
