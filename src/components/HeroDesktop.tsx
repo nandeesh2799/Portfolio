@@ -6,25 +6,19 @@ import {
   Linkedin, 
   Terminal, 
   Code2, 
-  Activity, 
-  Sparkles, 
-  RotateCcw,
   LayoutGrid,
-  Layers,
   ChevronRight
 } from 'lucide-react';
 import { developerProfile } from '../data/portfolioData';
 import { TerminalComponent } from './TerminalComponent';
 import { CodeEditorWindow } from './CodeEditorWindow';
-import { SystemMonitorWidget } from './SystemMonitorWidget';
-import { GenerativeMiniCanvas } from './GenerativeMiniCanvas';
 
 interface HeroDesktopProps {
   onNavigateSection: (sectionId: string) => void;
 }
 
 export const HeroDesktop: React.FC<HeroDesktopProps> = ({ onNavigateSection }) => {
-  const [activeWindowTab, setActiveWindowTab] = useState<'terminal' | 'code' | 'sysmon' | 'art'>('terminal');
+  const [activeWindowTab, setActiveWindowTab] = useState<'terminal' | 'code'>('terminal');
 
   return (
     <section id="hero" className="relative min-h-[96vh] pt-16 pb-12 flex flex-col justify-center overflow-hidden">
@@ -152,73 +146,20 @@ export const HeroDesktop: React.FC<HeroDesktopProps> = ({ onNavigateSection }) =
                 <Code2 className="w-3 h-3" />
                 <span>code.ts</span>
               </button>
-
-              <button
-                onClick={() => setActiveWindowTab('sysmon')}
-                className={`px-2.5 py-1 rounded text-[11px] flex items-center gap-1 transition-colors ${
-                  activeWindowTab === 'sysmon' 
-                    ? 'bg-terminal-purple/20 text-terminal-purple border border-terminal-purple/30 font-semibold' 
-                    : 'text-muted hover:text-slate-200'
-                }`}
-              >
-                <Activity className="w-3 h-3" />
-                <span>sysmon</span>
-              </button>
-
-              <button
-                onClick={() => setActiveWindowTab('art')}
-                className={`px-2.5 py-1 rounded text-[11px] flex items-center gap-1 transition-colors ${
-                  activeWindowTab === 'art' 
-                    ? 'bg-terminal-pink/20 text-terminal-pink border border-terminal-pink/30 font-semibold' 
-                    : 'text-muted hover:text-slate-200'
-                }`}
-              >
-                <Sparkles className="w-3 h-3" />
-                <span>canvas</span>
-              </button>
             </div>
           </div>
 
-          {/* Desktop Tiling Grid View (Dual Column on Large Screens, Tabbed on Small) */}
+          {/* Desktop Tiling Grid View */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-            
-            {/* Primary Interactive Window (Terminal or Code Editor) (7 cols) */}
-            <div className="lg:col-span-7 flex flex-col min-h-[420px]">
-              {activeWindowTab === 'terminal' && (
-                <TerminalComponent onNavigateSection={onNavigateSection} />
-              )}
-              {activeWindowTab === 'code' && (
-                <CodeEditorWindow />
-              )}
-              {activeWindowTab === 'sysmon' && (
-                <SystemMonitorWidget />
-              )}
-              {activeWindowTab === 'art' && (
-                <GenerativeMiniCanvas />
-              )}
+            {/* Primary Interactive Terminal Window (7 cols) */}
+            <div className="lg:col-span-7 flex flex-col min-h-[460px]">
+              <TerminalComponent onNavigateSection={onNavigateSection} />
             </div>
 
-            {/* Secondary Right Column Windows: Code Editor & System Monitor (5 cols, hidden or paired) */}
-            <div className="lg:col-span-5 flex flex-col gap-4">
-              {/* Secondary Window 1 */}
-              <div className="h-[260px]">
-                {activeWindowTab === 'terminal' ? (
-                  <CodeEditorWindow />
-                ) : (
-                  <TerminalComponent onNavigateSection={onNavigateSection} />
-                )}
-              </div>
-
-              {/* Secondary Window 2: System Monitor or Mini Canvas */}
-              <div className="h-[220px]">
-                {activeWindowTab === 'art' ? (
-                  <SystemMonitorWidget />
-                ) : (
-                  <GenerativeMiniCanvas />
-                )}
-              </div>
+            {/* Secondary Code Editor Window (5 cols) */}
+            <div className="lg:col-span-5 flex flex-col min-h-[460px]">
+              <CodeEditorWindow />
             </div>
-
           </div>
 
         </div>

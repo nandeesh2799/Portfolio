@@ -87,7 +87,7 @@ export const AboutSection: React.FC = () => {
             <div className="flex items-center justify-between px-4 py-2.5 bg-bg-secondary border-b border-bg-tertiary font-mono text-xs">
               <span className="flex items-center gap-2 text-terminal-purple">
                 <Brain className="w-4 h-4" />
-                <span>AI_SYNAPSE_x_CREATIVE_FLOW.sh</span>
+                <span>Creative Engineering</span>
               </span>
               <span className="text-[10px] text-terminal-green font-bold">[ACTIVE]</span>
             </div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { 
   Terminal, 
   Clock, 
-  Palette, 
   FileDown, 
   Sparkles, 
   Code2, 
@@ -11,19 +10,14 @@ import {
   Mail,
   Zap
 } from 'lucide-react';
-import { ThemeMode } from '../types';
 
 interface WaybarProps {
-  currentTheme: ThemeMode;
-  onThemeChange: (theme: ThemeMode) => void;
   onOpenTerminal: () => void;
   onNavigate: (sectionId: string) => void;
   activeSection: string;
 }
 
 export const Waybar: React.FC<WaybarProps> = ({
-  currentTheme,
-  onThemeChange,
   onOpenTerminal,
   onNavigate,
   activeSection
@@ -48,12 +42,6 @@ export const Waybar: React.FC<WaybarProps> = ({
     { id: 'art', label: '5:art', icon: Sparkles },
     { id: 'contact', label: '6:mail', icon: Mail },
   ];
-
-  const cycleTheme = () => {
-    const themes: ThemeMode[] = ['matrix', 'cyberpunk', 'creative'];
-    const nextIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
-    onThemeChange(themes[nextIndex]);
-  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-[#080B10]/95 backdrop-blur-md border-b border-bg-tertiary px-3 sm:px-6 py-1.5 font-mono text-xs select-none shadow-[0_4px_25px_rgba(0,0,0,0.6)]">
@@ -115,16 +103,6 @@ export const Waybar: React.FC<WaybarProps> = ({
           >
             <Terminal className="w-3.5 h-3.5" />
             <span className="hidden sm:inline font-semibold">Terminal</span>
-          </button>
-
-          {/* Theme Switcher */}
-          <button
-            onClick={cycleTheme}
-            className="p-1.5 rounded bg-bg-secondary hover:bg-bg-tertiary border border-bg-tertiary text-terminal-purple hover:text-white transition-all flex items-center gap-1"
-            title={`Current theme: ${currentTheme}. Click to cycle.`}
-          >
-            <Palette className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline text-[10px] text-muted capitalize">{currentTheme}</span>
           </button>
 
           {/* Real-time Clock */}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeMode } from './types';
 import { BootSequence } from './components/BootSequence';
 import { Waybar } from './components/Waybar';
 import { HeroDesktop } from './components/HeroDesktop';
@@ -16,14 +15,8 @@ export const App: React.FC = () => {
   const [bootCompleted, setBootCompleted] = useState<boolean>(() => {
     return sessionStorage.getItem('nandeeshos_booted') === 'true';
   });
-  const [currentTheme, setCurrentTheme] = useState<ThemeMode>('matrix');
   const [terminalModalOpen, setTerminalModalOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
-
-  // Synchronize theme on DOM attribute
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-  }, [currentTheme]);
 
   // Section observer to update active workspace pill in Waybar
   useEffect(() => {
@@ -72,8 +65,6 @@ export const App: React.FC = () => {
 
       {/* Minimal Top Waybar Panel */}
       <Waybar
-        currentTheme={currentTheme}
-        onThemeChange={setCurrentTheme}
         onOpenTerminal={() => setTerminalModalOpen(true)}
         onNavigate={navigateToSection}
         activeSection={activeSection}

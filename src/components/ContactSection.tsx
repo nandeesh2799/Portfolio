@@ -170,7 +170,7 @@ export const ContactSection: React.FC = () => {
             <div className="px-5 py-3 bg-bg-secondary border-b border-bg-tertiary flex items-center justify-between">
               <span className="text-terminal-green font-bold flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                <span>send_transmission.sh</span>
+                <span>Send Message</span>
               </span>
               <span className="text-muted text-[11px]">Interactive Form</span>
             </div>
