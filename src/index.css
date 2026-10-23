@@ -2,55 +2,128 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    color-scheme: dark;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    background-color: #04070D;
-    color: #F8FAFC;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
-  }
-
-  /* Custom clean dark scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #080D1A;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #1E293B;
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
-  }
+:root {
+  --color-primary: #39FF88;
+  --color-primary-rgb: 57, 255, 136;
+  --color-accent: #00F5FF;
+  --color-accent-rgb: 0, 245, 255;
+  --color-secondary: #A970FF;
+  --color-highlight: #FF4FD8;
+  --border-active: #39FF88;
 }
 
-/* Glassmorphism panel utility */
-.glass-panel {
-  background: rgba(8, 13, 26, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(30, 41, 59, 0.8);
+[data-theme="cyberpunk"] {
+  --color-primary: #00F5FF;
+  --color-primary-rgb: 0, 245, 255;
+  --color-accent: #FF4FD8;
+  --color-accent-rgb: 255, 79, 216;
+  --color-secondary: #39FF88;
+  --color-highlight: #A970FF;
+  --border-active: #00F5FF;
 }
 
-/* Utility to hide scrollbars for horizontal filter chips */
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
+[data-theme="creative"] {
+  --color-primary: #A970FF;
+  --color-primary-rgb: 169, 112, 255;
+  --color-accent: #FF4FD8;
+  --color-accent-rgb: 255, 79, 216;
+  --color-secondary: #00F5FF;
+  --color-highlight: #39FF88;
+  --border-active: #A970FF;
 }
-.scrollbar-none {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080B10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1C2433;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Scanline Overlay (Subtle) */
+.scanline-overlay {
+  background: linear-gradient(
+    rgba(18, 24, 38, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Hyprland Window Styling */
+.hypr-window {
+  background: #0D121B;
+  border: 1px solid #1E2838;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hypr-window:hover,
+.hypr-window.active-window {
+  border-color: var(--border-active);
+  box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.15), 0 12px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* Custom terminal selection */
+.terminal-select::selection {
+  background: rgba(57, 255, 136, 0.3);
+  color: #39FF88;
+}
+
+/* Glitch Heading Effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text:hover::before,
+.glitch-text:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text:hover::before {
+  left: 2px;
+  text-shadow: -1px 0 #FF4FD8;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-1 0.4s infinite linear alternate-reverse;
+}
+
+.glitch-text:hover::after {
+  left: -2px;
+  text-shadow: -1px 0 #00F5FF;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip: rect(10px, 9999px, 30px, 0); }
+  50% { clip: rect(60px, 9999px, 80px, 0); }
+  100% { clip: rect(20px, 9999px, 50px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(40px, 9999px, 70px, 0); }
+  50% { clip: rect(10px, 9999px, 40px, 0); }
+  100% { clip: rect(80px, 9999px, 110px, 0); }
 }

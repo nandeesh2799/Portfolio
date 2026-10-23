@@ -1,102 +1,139 @@
-import React from 'react';
-import { skillsData } from '../data/skillsData';
+import React, { useState } from 'react';
 import { 
-  Terminal, 
-  Cpu, 
   Code2, 
-  Smartphone, 
+  Layers, 
   Database, 
-  GitBranch, 
+  Cpu, 
+  Wrench, 
+  Terminal, 
+  Check, 
+  Copy,
   Sparkles,
-  Layers
+  ToggleLeft,
+  ToggleRight
 } from 'lucide-react';
+import { skillGroups } from '../data/portfolioData';
 
 export const SkillsSection: React.FC = () => {
-  const getCategoryIcon = (index: number) => {
-    switch (index) {
-      case 0: return <Sparkles className="w-4 h-4 text-cyan-400" />;
-      case 1: return <Code2 className="w-4 h-4 text-emerald-400" />;
-      case 2: return <Smartphone className="w-4 h-4 text-purple-400" />;
-      case 3: return <Database className="w-4 h-4 text-blue-400" />;
-      case 4: return <Cpu className="w-4 h-4 text-amber-400" />;
-      default: return <GitBranch className="w-4 h-4 text-slate-400" />;
+  const [viewMode, setViewMode] = useState<'matrix' | 'terminal'>('matrix');
+  const [copied, setCopied] = useState(false);
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'Languages': return <Code2 className="w-4 h-4 text-terminal-green" />;
+      case 'Frameworks': return <Layers className="w-4 h-4 text-terminal-cyan" />;
+      case 'Databases': return <Database className="w-4 h-4 text-terminal-purple" />;
+      case 'AI & LLMs': return <Cpu className="w-4 h-4 text-terminal-pink" />;
+      default: return <Wrench className="w-4 h-4 text-terminal-amber" />;
     }
   };
 
+  const copyConfig = () => {
+    const raw = skillGroups.map(g => `[${g.category.toUpperCase()}]\n${g.skills.join(', ')}`).join('\n\n');
+    navigator.clipboard.writeText(raw);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1200);
+  };
+
   return (
-    <section id="skills" className="py-24 relative bg-dark-950/40 border-t border-slate-800/80">
+    <section id="skills" className="py-24 relative border-t border-bg-tertiary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-800/50 text-emerald-400 font-mono text-xs mb-3">
-            <Terminal className="w-3.5 h-3.5" />
-            <span>TECHNICAL PROFICIENCIES &amp; APPLICATION</span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg-secondary border border-bg-tertiary text-xs font-mono text-terminal-cyan">
+              <Terminal className="w-3.5 h-3.5" />
+              <span>03 // DEPENDENCIES // SKILL_MATRIX</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-sans">
+              Technology Stack &amp; Tooling
+            </h2>
+            <p className="text-muted text-sm sm:text-base font-mono">
+              Engineered competencies across languages, distributed frameworks, AI models, and databases.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Grounded Competencies &amp; Concrete Context
-          </h2>
-          <p className="text-slate-400 text-sm sm:text-base mt-2">
-            Every technology listed below reflects actual hands-on repository code and production pipelines — contextualized by where and how it was applied.
-          </p>
+
+          {/* View Mode Switcher */}
+          <div className="flex items-center gap-2 font-mono text-xs">
+            <button
+              onClick={() => setViewMode(viewMode === 'matrix' ? 'terminal' : 'matrix')}
+              className="px-3.5 py-1.5 rounded-lg bg-bg-secondary hover:bg-bg-tertiary border border-bg-tertiary text-slate-200 flex items-center gap-2 transition-colors"
+            >
+              <span>View: {viewMode === 'matrix' ? 'Visual Grid' : 'Raw Config ($)'}</span>
+              {viewMode === 'matrix' ? <ToggleLeft className="w-4 h-4 text-terminal-cyan" /> : <ToggleRight className="w-4 h-4 text-terminal-green" />}
+            </button>
+          </div>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillsData.map((category, idx) => (
-            <div
-              key={category.title}
-              className="p-6 rounded-2xl bg-dark-900/90 border border-slate-800/80 hover:border-slate-700 transition-all flex flex-col justify-between shadow-md"
-            >
-              <div>
-                <div className="flex items-center gap-2.5 pb-3 border-b border-slate-800 mb-3">
-                  <div className="p-2 rounded-xl bg-dark-950 border border-slate-800">
-                    {getCategoryIcon(idx)}
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-white">
-                      {category.title}
-                    </h3>
-                    <p className="text-[11px] text-slate-400 font-mono line-clamp-1">
-                      {category.description}
-                    </p>
+        {/* View Mode: Visual Cards Matrix */}
+        {viewMode === 'matrix' ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skillGroups.map((group) => (
+              <div 
+                key={group.category}
+                className="hypr-window rounded-2xl overflow-hidden p-5 space-y-4 hover:border-terminal-cyan/50 transition-all group"
+              >
+                {/* Group Title Bar */}
+                <div className="flex items-center justify-between pb-3 border-b border-bg-tertiary">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2 rounded-lg bg-bg-secondary border border-bg-tertiary">
+                      {getCategoryIcon(group.category)}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white text-sm font-sans group-hover:text-terminal-cyan transition-colors">
+                        {group.category}
+                      </h3>
+                      <span className="text-[10px] font-mono text-muted">
+                        {group.skills.length} modules loaded
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-2.5 mt-4">
-                  {category.skills.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className={`p-2.5 rounded-xl border text-xs transition-colors ${
-                        skill.highlight
-                          ? 'bg-dark-950/90 border-slate-700/80 text-white'
-                          : 'bg-dark-950/50 border-slate-850 text-slate-300'
-                      }`}
+                {/* Skills Badges */}
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span 
+                      key={skill}
+                      className="px-3 py-1.5 rounded-lg bg-bg-secondary hover:bg-bg-tertiary border border-bg-tertiary hover:border-terminal-green/50 text-slate-300 hover:text-white font-mono text-xs transition-all cursor-default flex items-center gap-1.5"
                     >
-                      <div className="flex items-center justify-between font-semibold">
-                        <span className={skill.highlight ? 'text-cyan-300' : 'text-slate-200'}>
-                          {skill.name}
-                        </span>
-                        {skill.highlight && (
-                          <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded bg-cyan-950 text-cyan-400 border border-cyan-800/40">
-                            Core
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-[10px] text-slate-400 font-mono mt-1">
-                        ↳ {skill.context}
-                      </p>
-                    </div>
+                      <span className="w-1 h-1 rounded-full bg-terminal-green" />
+                      <span>{skill}</span>
+                    </span>
                   ))}
                 </div>
               </div>
-
-              <div className="mt-5 pt-3 border-t border-slate-800/80 text-[10px] font-mono text-slate-500">
-                Verified via GitHub &amp; Resume Sources
-              </div>
+            ))}
+          </div>
+        ) : (
+          /* View Mode: Raw Terminal Config Output */
+          <div className="hypr-window rounded-2xl overflow-hidden font-mono text-xs">
+            <div className="flex items-center justify-between px-4 py-2.5 bg-bg-secondary border-b border-bg-tertiary">
+              <span className="text-terminal-green flex items-center gap-2">
+                <Terminal className="w-3.5 h-3.5" />
+                <span>cat /etc/developer/skills.conf</span>
+              </span>
+              <button 
+                onClick={copyConfig}
+                className="text-muted hover:text-white flex items-center gap-1 text-[11px] transition-colors"
+              >
+                {copied ? <Check className="w-3 h-3 text-terminal-green" /> : <Copy className="w-3 h-3" />}
+                <span>{copied ? 'Copied' : 'Copy'}</span>
+              </button>
             </div>
-          ))}
-        </div>
+
+            <div className="p-6 bg-[#080B10] space-y-6 text-slate-300 leading-relaxed overflow-x-auto">
+              {skillGroups.map((group) => (
+                <div key={group.category} className="space-y-1">
+                  <p className="text-terminal-cyan font-bold">[{group.category.toUpperCase()}]</p>
+                  <p className="text-terminal-green">enabled = true</p>
+                  <p className="text-slate-300">modules = [ {group.skills.map(s => `"${s}"`).join(', ')} ]</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
       </div>
     </section>

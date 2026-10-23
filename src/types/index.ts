@@ -1,88 +1,50 @@
-export type AudienceFilterType = 'all' | 'fullstack' | 'ai' | 'creative';
-
-export type ProjectCategory = 'Full Stack' | 'AI & GenAI' | 'Automation' | 'Mobile' | 'Machine Learning';
-
-export type ProjectStatus = 'Production-Ready' | 'Active System' | 'Complete' | 'Prototype / MVP';
+export type ThemeMode = 'matrix' | 'cyberpunk' | 'creative';
 
 export interface Project {
   id: string;
   title: string;
-  subtitle: string;
-  category: ProjectCategory;
-  audience: AudienceFilterType[];
-  year: string;
-  status: ProjectStatus;
-  statusColor?: string;
-  problem: string;
-  users: string;
-  contribution: string;
+  category: string;
   tech: string[];
-  architecture: string;
-  features: string[];
-  challenges: string;
-  repoUrl: string;
-  demoUrl?: string;
-  featured: boolean;
-  highlightStat?: { label: string; value: string };
-  badge: string;
+  description: string;
+  keyFeatures: string[];
+  repoUrl?: string;
+  badge?: string;
+  iconName: string;
+  metrics?: { label: string; value: string };
 }
 
-export interface Artwork {
+export interface SkillGroup {
+  category: string;
+  icon: string;
+  skills: string[];
+}
+
+export interface WindowState {
   id: string;
   title: string;
-  medium: string;
-  category: 'paint' | 'sketch' | 'wall' | 'fabric';
-  year: string;
-  dimensions: string;
-  description: string;
-  image: string;
+  icon: string;
+  isOpen: boolean;
+  isMinimized: boolean;
+  isMaximized: boolean;
+  zIndex: number;
 }
 
-export interface SkillItem {
-  name: string;
-  context: string;
-  highlight?: boolean;
-}
-
-export interface SkillCategory {
-  title: string;
-  description: string;
-  skills: SkillItem[];
-}
-
-export interface EducationEntry {
-  title: string;
+export interface EducationItem {
+  degree: string;
   institution: string;
   period: string;
-  location: string;
-  details: string;
-  statusBadge: string;
+  details?: string;
 }
 
-export interface CertificationEntry {
+export interface CertificationItem {
   title: string;
   issuer: string;
-  year: string;
-  description: string;
+  status: string;
 }
 
-export interface AchievementEntry {
+export interface AchievementItem {
   title: string;
-  event: string;
   year: string;
-  rankBadge: string;
+  event: string;
   description: string;
-  category: 'hackathon' | 'contest' | 'volunteering';
-}
-
-export interface ChatMessage {
-  id: string;
-  sender: 'user' | 'assistant';
-  text: string;
-  timestamp: string;
-  suggestedAction?: {
-    label: string;
-    actionType: 'navigate' | 'modal' | 'download';
-    target: string;
-  };
 }

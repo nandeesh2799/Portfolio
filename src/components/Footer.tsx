@@ -1,72 +1,60 @@
 import React from 'react';
-import { Github, Mail, Phone, ArrowUp, Heart, Terminal } from 'lucide-react';
+import { Terminal, Github, Linkedin, Mail, Heart, Sparkles } from 'lucide-react';
+import { developerProfile } from '../data/portfolioData';
 
 export const Footer: React.FC = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="bg-dark-950 border-t border-slate-800/80 py-12 text-slate-400 font-sans text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <footer className="border-t border-bg-tertiary bg-[#05070B] py-10 font-mono text-xs text-muted">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-900">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-dark-900 border border-slate-700 flex items-center justify-center font-mono font-bold text-cyan-400 text-xs">
-              NK
-            </div>
-            <div>
-              <p className="font-bold text-slate-200 text-sm">Nandeesh Narayan Kurubar</p>
-              <p className="text-[11px] font-mono text-slate-500">
-                Full-Stack Developer • AI Systems Builder • Fine Artist
-              </p>
-            </div>
+        {/* Terminal Echo Quote */}
+        <div className="p-4 rounded-xl bg-bg-secondary/60 border border-bg-tertiary flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-terminal-cyan font-bold">nand@portfolio:~$</span>
+            <span className="text-terminal-green font-semibold">echo "Code. Build. Create. Repeat."</span>
           </div>
 
-          <div className="flex items-center gap-6 font-mono text-xs">
-            <a
-              href="https://github.com/nandeesh2799"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-cyan-300 transition-colors flex items-center gap-1.5"
-            >
-              <Github className="w-4 h-4" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href="mailto:nandeeshnk506@gmail.com"
-              className="hover:text-cyan-300 transition-colors flex items-center gap-1.5"
-            >
-              <Mail className="w-4 h-4" />
-              <span>Email</span>
-            </a>
-            <a
-              href="tel:+917892726438"
-              className="hover:text-cyan-300 transition-colors flex items-center gap-1.5"
-            >
-              <Phone className="w-4 h-4" />
-              <span>+91 78927 26438</span>
-            </a>
+          <div className="flex items-center gap-2 text-[11px] text-muted">
+            <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
+            <span>NandeeshOS v2026 // Kernel 6.8 Zen</span>
           </div>
-
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-colors font-mono text-xs"
-            aria-label="Back to top of page"
-          >
-            <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5 text-cyan-400" />
-          </button>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-500 gap-4">
-          <p>
-            © {new Date().getFullYear()} Nandeesh Narayan Kurubar. All rights reserved.
+        {/* Bottom Socials & Copyright */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-bg-tertiary/50">
+          <p className="text-slate-400 text-center sm:text-left">
+            Crafted by <span className="text-white font-bold">{developerProfile.name}</span>. Built with Arch Linux mindset, React &amp; Tailwind.
           </p>
 
-          <p className="flex items-center gap-1.5">
-            <span>Engineered with React, TypeScript, Three.js WebGL &amp; Tailwind CSS</span>
-          </p>
+          <div className="flex items-center gap-4">
+            <a
+              href={developerProfile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-terminal-green transition-colors flex items-center gap-1.5"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href={developerProfile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-terminal-cyan transition-colors flex items-center gap-1.5"
+            >
+              <Linkedin className="w-3.5 h-3.5" />
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href={`mailto:${developerProfile.email}`}
+              className="text-slate-400 hover:text-terminal-pink transition-colors flex items-center gap-1.5"
+            >
+              <Mail className="w-3.5 h-3.5" />
+              <span>Email</span>
+            </a>
+          </div>
         </div>
 
       </div>

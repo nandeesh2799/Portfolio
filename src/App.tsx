@@ -1,51 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { AudienceFilterType, Project } from './types';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { ProjectsGallery } from './components/ProjectsGallery';
-import { InteractiveLab } from './components/InteractiveLab';
-import { ArtStudio } from './components/ArtStudio';
+import { ThemeMode } from './types';
+import { BootSequence } from './components/BootSequence';
+import { Waybar } from './components/Waybar';
+import { HeroDesktop } from './components/HeroDesktop';
 import { AboutSection } from './components/AboutSection';
 import { SkillsSection } from './components/SkillsSection';
-import { EducationSection } from './components/EducationSection';
+import { ProjectsSection } from './components/ProjectsSection';
+import { GenerativeArtPlayground } from './components/GenerativeArtPlayground';
+import { DossierSection } from './components/DossierSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { ProjectModal } from './components/ProjectModal';
-import { ResumeModal } from './components/ResumeModal';
-import { AiAssistant } from './components/AiAssistant';
+import { FloatingTerminalModal } from './components/FloatingTerminalModal';
 
 export const App: React.FC = () => {
-  const [audienceFilter, setAudienceFilter] = useState<AudienceFilterType>('all');
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [resumeModalOpen, setResumeModalOpen] = useState(false);
-  const [initialLabDemo, setInitialLabDemo] = useState<string>('stockbridge');
+  const [bootCompleted, setBootCompleted] = useState<boolean>(() => {
+    return sessionStorage.getItem('nandeeshos_booted') === 'true';
+  });
+  const [currentTheme, setCurrentTheme] = useState<ThemeMode>('matrix');
+  const [terminalModalOpen, setTerminalModalOpen] = useState<boolean>(false);
+  const [activeSection, setActiveSection] = useState<string>('hero');
 
-  // Sync Audience filter with URL query parameter & browser back/forward
+  // Synchronize theme on DOM attribute
   useEffect(() => {
-    const syncFromUrl = () => {
-      const params = new URLSearchParams(window.location.search);
-      const viewParam = params.get('view') as AudienceFilterType;
-      if (viewParam && ['all', 'fullstack', 'ai', 'creative'].includes(viewParam)) {
-        setAudienceFilter(viewParam);
-      } else {
-        setAudienceFilter('all');
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  }, [currentTheme]);
+
+  // Section observer to update active workspace pill in Waybar
+  useEffect(() => {
+    const sectionIds = ['hero', 'about', 'skills', 'projects', 'art', 'dossier', 'contact'];
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 200;
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(id);
+            break;
+          }
+        }
       }
     };
 
-    syncFromUrl();
-    window.addEventListener('popstate', syncFromUrl);
-    return () => window.removeEventListener('popstate', syncFromUrl);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleFilterChange = (filter: AudienceFilterType) => {
-    setAudienceFilter(filter);
-    const url = new URL(window.location.href);
-    if (filter === 'all') {
-      url.searchParams.delete('view');
-    } else {
-      url.searchParams.set('view', filter);
-    }
-    window.history.pushState({}, '', url.toString());
+  const handleBootComplete = () => {
+    sessionStorage.setItem('nandeeshos_booted', 'true');
+    setBootCompleted(true);
   };
 
   const navigateToSection = (sectionId: string) => {
@@ -55,74 +59,47 @@ export const App: React.FC = () => {
     }
   };
 
-  const handleNavigateToDemo = (demoId: string) => {
-    setInitialLabDemo(demoId);
-    navigateToSection('laboratory');
-  };
-
   return (
-    <div className="min-h-screen bg-[#04070D] text-slate-100 flex flex-col font-sans selection:bg-cyan-500/20 selection:text-cyan-300">
-      {/* Top Sticky Navigation */}
-      <Navbar
-        currentFilter={audienceFilter}
-        onFilterChange={handleFilterChange}
-        onOpenResumeModal={() => setResumeModalOpen(true)}
+    <div className="min-h-screen bg-[#080B10] text-[#E0E6ED] relative selection:bg-terminal-green/20 selection:text-terminal-green">
+      
+      {/* Initial Boot Sequence (Only runs once per session, skippable) */}
+      {!bootCompleted && (
+        <BootSequence onComplete={handleBootComplete} />
+      )}
+
+      {/* Subtle Scanline Overlay across entire desktop */}
+      <div className="fixed inset-0 scanline-overlay pointer-events-none z-30" />
+
+      {/* Minimal Top Waybar Panel */}
+      <Waybar
+        currentTheme={currentTheme}
+        onThemeChange={setCurrentTheme}
+        onOpenTerminal={() => setTerminalModalOpen(true)}
+        onNavigate={navigateToSection}
+        activeSection={activeSection}
       />
 
-      <main className="flex-1">
-        {/* Cinematic 3D Studio Hero */}
-        <Hero
-          onOpenResumeModal={() => setResumeModalOpen(true)}
-          onExploreWork={() => navigateToSection('projects')}
-        />
-
-        {/* Selected Work Gallery */}
-        <ProjectsGallery
-          currentAudience={audienceFilter}
-          onSelectProject={(proj) => setSelectedProject(proj)}
-          onNavigateToDemo={handleNavigateToDemo}
-        />
-
-        {/* Interactive System Laboratory */}
-        <InteractiveLab initialDemo={initialLabDemo} />
-
-        {/* Fine Art Studio & Craftsmanship */}
-        <ArtStudio />
-
-        {/* About Me & Builder Mindset */}
-        <AboutSection onOpenResumeModal={() => setResumeModalOpen(true)} />
-
-        {/* Technical Skills & Practical Application */}
+      {/* Main Desktop Sections */}
+      <main className="relative z-10">
+        <HeroDesktop onNavigateSection={navigateToSection} />
+        <AboutSection />
         <SkillsSection />
-
-        {/* Education, Certifications & Achievements */}
-        <EducationSection />
-
-        {/* Direct Contact & Inquiry Form */}
+        <ProjectsSection />
+        <GenerativeArtPlayground />
+        <DossierSection />
         <ContactSection />
       </main>
 
-      {/* Footer */}
+      {/* Desktop Footer */}
       <Footer />
 
-      {/* Case Study Drawer / Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-        onNavigateToDemo={handleNavigateToDemo}
+      {/* Persistent / Floating Terminal Modal ($) */}
+      <FloatingTerminalModal
+        isOpen={terminalModalOpen}
+        onClose={() => setTerminalModalOpen(false)}
+        onNavigateSection={navigateToSection}
       />
 
-      {/* Tailored Resume Downloader Modal */}
-      <ResumeModal
-        isOpen={resumeModalOpen}
-        onClose={() => setResumeModalOpen(false)}
-      />
-
-      {/* Floating AI Portfolio Copilot */}
-      <AiAssistant
-        onOpenResumeModal={() => setResumeModalOpen(true)}
-        onNavigateToSection={navigateToSection}
-      />
     </div>
   );
 };
