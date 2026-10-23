@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 /* ─── Artwork data ──────────────────────────────────────────── */
-type ArtCategory = 'All' | 'Paintings' | 'Sketches' | 'Tattoo Art' | 'Wall Art';
+type ArtCategory = 'All' | 'Paintings' | 'Fabric Art' | 'Tattoo Art' | 'Sketches' | 'Wall Art';
 
 interface Artwork {
   id: string;
@@ -29,80 +29,90 @@ interface Artwork {
 const artworks: Artwork[] = [
   // ── Paintings ──────────────────────────────────────────
   {
-    id: 'radha-krishna',
-    src: '/images/artworks/radha-krishna.jpg',
-    title: 'Radha & Krishna',
+    id: 'shiva-parvati',
+    src: '/images/artworks/shiva-parvati.jpg',
+    title: 'Shiva & Parvati',
     category: 'Paintings',
     medium: 'Acrylic on Canvas',
-    description: 'Bold flat-art style capturing the divine union of Radha and Krishna with vivid orange, red, and blue pigments.',
+    description: 'Stylized contemporary acrylic composition depicting Lord Shiva and Goddess Parvati in divine harmony.',
   },
   {
-    id: 'yaksha-deity',
-    src: '/images/artworks/yaksha-deity.jpg',
-    title: 'Yaksha Deity',
+    id: 'yellamma-devi',
+    src: '/images/artworks/yellamma-devi.jpg',
+    title: 'Yellamma Devi',
     category: 'Paintings',
     medium: 'Acrylic on Canvas',
-    description: 'A richly ornamented folk deity rendered in traditional South Indian iconographic style on a deep green ground.',
+    description: 'A richly detailed devotional painting of Goddess Renuka Yellamma, adorned with traditional ornaments and radiant crown halo.',
   },
   {
-    id: 'shiva-cosmic-blue',
-    src: '/images/artworks/shiva-cosmic-blue.jpg',
-    title: 'Shiva — Cosmic Meditation',
+    id: 'raghavendra-swamy',
+    src: '/images/artworks/raghavendra-swamy.jpg',
+    title: 'Guru Raghavendra Swamy',
     category: 'Paintings',
-    medium: 'Acrylic on Paper',
-    description: 'Lord Shiva in deep cosmic meditation, painted with galaxy-blue tones, white splatter starfields, and a vivid saffron tilak.',
+    medium: 'Acrylic on Canvas',
+    description: 'A serene portrait of Saint Sri Raghavendra Swamy of Mantralayam seated in contemplation, holding sacred idol and staff.',
   },
   {
     id: 'ram-lalla',
     src: '/images/artworks/ram-lalla.jpg',
     title: 'Ram Lalla',
     category: 'Paintings',
-    medium: 'Oil on Canvas',
+    medium: 'Acrylic on Canvas',
     description: 'A luminous portrayal of Ram Lalla — the child form of Lord Ram — adorned in gold ornaments against a warm saffron glow.',
   },
   {
-    id: 'sadhu-saint',
-    src: '/images/artworks/sadhu-saint.jpg',
-    title: 'The Sadhu Saint',
-    category: 'Paintings',
-    medium: 'Oil on Canvas',
-    description: 'A photorealistic oil painting of a revered sadhu seated before an ornate temple shrine, holding a golden idol and a danda.',
-  },
-  {
-    id: 'bharatanatyam',
-    src: '/images/artworks/bharatanatyam.jpg',
-    title: 'Bharatanatyam',
+    id: 'nagavalli',
+    src: '/images/artworks/nagavalli.jpg',
+    title: 'Nagavalli — Classical Dancer',
     category: 'Paintings',
     medium: 'Acrylic on Black Canvas',
-    description: 'A Bharatanatyam dancer frozen mid-pose on a pure black canvas — vibrant costume, precise mudra, and graceful balance.',
+    description: 'Expressive classical dancer in striking costume and mudra pose against an intense black backdrop.',
+  },
+  {
+    id: 'shiva-cosmic-blue',
+    src: '/images/artworks/shiva-cosmic-blue.jpg',
+    title: 'Shiva — Cosmic Meditation',
+    category: 'Paintings',
+    medium: 'Watercolour on Paper',
+    description: 'Lord Shiva in deep cosmic meditation, painted with galaxy-blue watercolour washes, celestial starfields, and crescent moon.',
+  },
+
+  // ── Fabric Art ─────────────────────────────────────────
+  {
+    id: 'agni-shiva-fabric',
+    src: '/images/artworks/agni-shiva-fabric.jpg',
+    title: 'Agni Shiva — Fabric Painting',
+    category: 'Fabric Art',
+    medium: 'Fabric Paint on T-Shirt',
+    description: 'Lord Shiva wielding the trishul, surrounded by roaring fire — hand-painted with fabric pigments directly onto a white t-shirt.',
   },
 
   // ── Tattoo Art ─────────────────────────────────────────
   {
-    id: 'agni-shiva-tattoo',
-    src: '/images/artworks/agni-shiva-tattoo.jpg',
-    title: 'Agni Shiva — Tattoo Art',
+    id: 'shiva-kali-tattoo',
+    src: '/images/artworks/shiva-kali-tattoo.jpg',
+    title: 'Shiva & Kali — Tattoo Art',
     category: 'Tattoo Art',
     medium: 'Tattoo Ink on Synthetic Fake Skin',
-    description: 'Lord Shiva wielding the trishul, surrounded by roaring fire — precision tattoo needlework and shading executed on practice fake skin.',
+    description: 'Detailed tattoo needlework depicting serene Shiva and fierce Kali, practiced with precision needle shading on fake skin.',
   },
 
   // ── Sketches ───────────────────────────────────────────
   {
-    id: 'shiva-kali-sketch',
-    src: '/images/artworks/shiva-kali-sketch.jpg',
-    title: 'Shiva & Kali — Graphite',
+    id: 'krishna-watercolour',
+    src: '/images/artworks/krishna-watercolour.jpg',
+    title: 'Krishna — Watercolour',
     category: 'Sketches',
-    medium: 'Graphite Pencil on Cartridge Paper',
-    description: 'A monumental graphite study — serene Shiva above and fierce Kali below — showcasing fine tonal gradation and anatomical detail.',
+    medium: 'Watercolour & Ink on Sketchbook',
+    description: 'Young Krishna adorned with peacock feathers and gold jewellery, rendered in delicate watercolour washes with clean ink outlines.',
   },
   {
-    id: 'portrait-red-ink',
-    src: '/images/artworks/portrait-red-ink.jpg',
-    title: 'Portrait in Red Ink',
+    id: 'portrait-watercolour',
+    src: '/images/artworks/portrait-watercolour.jpg',
+    title: 'Portrait Study',
     category: 'Sketches',
-    medium: 'Red Ballpoint Pen on Paper',
-    description: 'A monochromatic portrait study executed entirely in red ballpoint, capturing subtle expression and hair texture through controlled hatching.',
+    medium: 'Watercolour / Ink on Paper',
+    description: 'Expressive monochromatic portrait capturing a joyful smile with subtle shading and fine hair detailing.',
   },
   {
     id: 'aghor-shiva-pen',
@@ -112,27 +122,19 @@ const artworks: Artwork[] = [
     medium: 'Ink Pen on Notebook Paper',
     description: 'A dynamic pen sketch of Aghor Shiva dancing in the Tandava — wild hair, multiple arms, and fierce energy captured in fine linework.',
   },
-  {
-    id: 'krishna-watercolour',
-    src: '/images/artworks/krishna-watercolour.jpg',
-    title: 'Krishna — Watercolour',
-    category: 'Sketches',
-    medium: 'Watercolour & Ink on Sketchbook',
-    description: 'Young Krishna adorned with peacock feathers and gold jewellery, rendered in delicate watercolour washes with clean ink outlines.',
-  },
 
   // ── Wall Art ───────────────────────────────────────────
   {
     id: 'hanuman-wall-mural',
     src: '/images/artworks/hanuman-wall-mural.jpg',
-    title: 'Hanuman Wall Mural',
+    title: 'Hanuman Wall Painting & Flag',
     category: 'Wall Art',
-    medium: 'Wall Painting / Acrylic',
-    description: 'A bold monochrome Hanuman mural painted directly on a wall, paired with a hand-illustrated Bajrang Dal flag in Kannada script.',
+    medium: 'Wall Mural & Acrylic on Fabric',
+    description: 'A bold monochrome Hanuman mural painted directly on a wall, accompanied by a hand-painted Rama-Hanuman flag with Kannada script.',
   },
 ];
 
-const CATEGORIES: ArtCategory[] = ['All', 'Paintings', 'Sketches', 'Tattoo Art', 'Wall Art'];
+const CATEGORIES: ArtCategory[] = ['All', 'Paintings', 'Fabric Art', 'Tattoo Art', 'Sketches', 'Wall Art'];
 
 /* ─── Generative canvas types ──────────────────────────────── */
 type PaletteKey = 'cyberpunk' | 'matrix' | 'aurora' | 'solar';
