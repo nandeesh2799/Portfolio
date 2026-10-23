@@ -170,29 +170,20 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
             </div>
           </div>
 
-          {/* Right: Neon Cyberpunk Portrait Cutout (5 cols) */}
-          <div className="lg:col-span-5 relative flex justify-center lg:justify-end items-center">
-            <div className="relative w-full max-w-[420px] flex justify-center items-center">
+          {/* Right: Neon Terminal Portfolio Hero Showcase (5 cols) */}
+          <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
+            <div className="relative group w-full max-w-[450px] rounded-3xl overflow-hidden p-1.5 bg-gradient-to-br from-terminal-green/30 via-terminal-cyan/20 to-terminal-purple/30 shadow-[0_0_50px_rgba(0,245,255,0.2)] hover:shadow-[0_0_75px_rgba(57,255,136,0.3)] transition-all duration-500">
               
-              {/* Radial Neon Glow Behind the Cutout */}
-              <div className="absolute w-[320px] h-[320px] rounded-full bg-gradient-to-tr from-terminal-green/20 via-terminal-cyan/25 to-terminal-purple/20 blur-[70px] pointer-events-none" />
-
-              {/* Glowing Top Chip */}
-              <div className="absolute top-2 right-4 z-20 px-3 py-1 rounded-full bg-black/60 border border-terminal-green/40 backdrop-blur-md font-mono text-[10px] text-terminal-green flex items-center gap-1.5 shadow-lg">
-                <span className="w-1.5 h-1.5 rounded-full bg-terminal-green animate-pulse" />
-                <span>Linux Powered</span>
-              </div>
-
-              {/* Cutout Portrait with Neon Ring */}
-              <div className="relative z-10 group">
+              {/* Card Container */}
+              <div className="relative rounded-[22px] overflow-hidden bg-[#0A0E17]">
                 <img
-                  src="/images/coded-neon-portrait.png"
-                  alt="Nandeesh Narayan Kurubar — Coded Neon Portrait"
-                  className="w-full max-h-[480px] object-contain drop-shadow-[0_15px_35px_rgba(0,245,255,0.25)] transform group-hover:scale-[1.02] transition-transform duration-500 block"
+                  src="/images/Neon Terminal Portfolio Hero.png"
+                  alt="Nandeesh Narayan Kurubar — Neon Terminal Portfolio Hero"
+                  className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700 block"
                 />
 
-                {/* Bottom subtle gradient blend */}
-                <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-[#080B10] to-transparent pointer-events-none" />
+                {/* Subtle bottom shadow vignette */}
+                <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-[#080B10]/80 via-transparent to-transparent pointer-events-none" />
               </div>
 
             </div>
