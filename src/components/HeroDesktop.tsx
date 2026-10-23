@@ -35,7 +35,7 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
     <section
       ref={ref}
       id="hero"
-      className={`relative min-h-[96vh] pt-16 pb-12 flex flex-col justify-center overflow-hidden ${className}`}
+      className={`relative min-h-[85vh] lg:min-h-[90vh] pt-16 pb-8 lg:pb-12 flex flex-col justify-center overflow-hidden ${className}`}
     >
       {/* Subtle Background Grid & Ambient Glows */}
       <div 
@@ -49,7 +49,7 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
       <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-terminal-cyan/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-terminal-purple/5 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 space-y-8 my-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 space-y-6 sm:space-y-8 my-auto">
         
         {/* Top Developer Introduction Hero Block (Split with Neon Cyberpunk Portrait) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

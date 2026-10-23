@@ -256,11 +256,11 @@ export const GenerativeArtPlayground = forwardRef<HTMLElement, SectionProps>(
     <section
       ref={ref}
       id="art"
-      className={`py-24 relative border-t border-bg-tertiary ${className}`}
+      className={`py-12 sm:py-16 relative border-t border-bg-tertiary ${className}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-10 space-y-2">
+        <div className="mb-8 space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg-secondary border border-bg-tertiary text-xs font-mono text-terminal-purple">
             <Sparkles className="w-3.5 h-3.5" />
             <span>05 // DIGITAL_STUDIO</span>
