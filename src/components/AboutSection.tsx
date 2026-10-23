@@ -1,66 +1,8 @@
-import React, { useRef, useEffect } from 'react';
-import { Terminal, User, Sparkles, Brain, Cpu, MapPin, GraduationCap, Flame, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { Terminal, User } from 'lucide-react';
 import { developerProfile } from '../data/portfolioData';
 
 export const AboutSection: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Generative Artwork: Neural Nodes intersecting with Creative Paint Flow
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationId: number;
-    let t = 0;
-    const width = (canvas.width = canvas.parentElement?.clientWidth || 400);
-    const height = (canvas.height = canvas.parentElement?.clientHeight || 450);
-
-    const render = () => {
-      ctx.fillStyle = 'rgba(8, 11, 16, 0.15)';
-      ctx.fillRect(0, 0, width, height);
-
-      t += 0.02;
-
-      // Draw intersecting generative sine curves (Neural vs Human Flow)
-      const numLines = 6;
-      for (let i = 0; i < numLines; i++) {
-        ctx.beginPath();
-        ctx.lineWidth = 1.5;
-        const color = i % 2 === 0 ? 'rgba(0, 245, 255, 0.6)' : 'rgba(169, 112, 255, 0.6)';
-        ctx.strokeStyle = color;
-
-        for (let x = 0; x < width; x += 6) {
-          const y = height / 2 + 
-            Math.sin(x * 0.015 + t + i) * 45 + 
-            Math.cos(x * 0.025 - t * 0.5) * 30;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-
-      // Draw interactive pulsing nodes (AI synaptic connections)
-      for (let j = 0; j < 8; j++) {
-        const nx = (width / 9) * (j + 1);
-        const ny = height / 2 + Math.sin(nx * 0.015 + t) * 45;
-        ctx.beginPath();
-        ctx.arc(nx, ny, 3 + Math.sin(t * 2 + j) * 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#39FF88';
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#39FF88';
-        ctx.fill();
-      }
-
-      animationId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => cancelAnimationFrame(animationId);
-  }, []);
-
   return (
     <section id="about" className="py-24 relative border-t border-bg-tertiary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,27 +21,23 @@ export const AboutSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Artistic Split-Screen Layout */}
+        {/* Split-Screen Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          {/* Left Column: Generative AI & Art Canvas Illustration (5 cols) */}
+          {/* Left Column: Portrait Photo (5 cols) */}
           <div className="lg:col-span-5 h-[380px] sm:h-[460px] hypr-window rounded-2xl overflow-hidden relative flex flex-col">
-            <div className="flex items-center justify-between px-4 py-2.5 bg-bg-secondary border-b border-bg-tertiary font-mono text-xs">
-              <span className="flex items-center gap-2 text-terminal-purple">
-                <Brain className="w-4 h-4" />
-                <span>Creative Engineering</span>
-              </span>
-              <span className="text-[10px] text-terminal-green font-bold">[ACTIVE]</span>
-            </div>
-
             <div className="relative flex-1 w-full h-full bg-[#080B10]">
-              <canvas ref={canvasRef} className="w-full h-full block" />
-              <div className="absolute inset-0 bg-gradient-to-t from-bg-card via-transparent to-transparent pointer-events-none" />
+              <img 
+                src="/images/portrait.jpg" 
+                alt={developerProfile.name}
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-bg-card/90 via-transparent to-transparent pointer-events-none" />
               
               <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-bg-secondary/90 border border-bg-tertiary backdrop-blur-md font-mono text-xs">
-                <p className="text-terminal-cyan font-bold">Generative Concept Visual</p>
-                <p className="text-muted text-[11px] mt-0.5">
-                  Algorithmic flow lines meeting human creative intuition.
+                <p className="text-white font-bold">{developerProfile.name}</p>
+                <p className="text-terminal-green text-[11px] mt-0.5">
+                  {developerProfile.role}
                 </p>
               </div>
             </div>
