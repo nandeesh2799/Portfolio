@@ -22,7 +22,7 @@ const artworks: Artwork[] = [
   {
     id: 'shiva-parvati',
     src: '/images/artworks/shiva-parvati.jpg',
-    title: 'Shiva Parvati',
+    title: 'Shiva & Parvati',
     category: 'Paintings',
     medium: 'Acrylic on Canvas',
     description: 'Stylized contemporary acrylic composition depicting Lord Shiva and Goddess Parvati in divine harmony.',
@@ -30,18 +30,18 @@ const artworks: Artwork[] = [
   {
     id: 'yellamma-devi',
     src: '/images/artworks/yellamma-devi.jpg',
-    title: 'Yellamma Diety',
+    title: 'Yellamma Devi',
     category: 'Paintings',
     medium: 'Acrylic on Canvas',
-    description: 'A richly detailed devotional painting of Goddess Renuka Yellamma, adorned with traditional ornaments and radiant crown halo.',
+    description: 'A richly detailed devotional painting of Goddess Renuka Yellamma, adorned with traditional ornaments and a radiant halo.',
   },
   {
     id: 'raghavendra-swamy',
     src: '/images/artworks/raghavendra-swamy.jpg',
-    title: 'Raghvendra Swamy',
+    title: 'Sri Raghavendra Swamy',
     category: 'Paintings',
     medium: 'Acrylic on Canvas',
-    description: 'A serene portrait of Saint Sri Raghavendra Swamy of Mantralayam seated in contemplation, holding sacred idol and staff.',
+    description: 'A serene portrait of Saint Sri Raghavendra Swamy of Mantralayam seated in contemplation, holding a sacred idol and staff.',
   },
   {
     id: 'ram-lalla',
@@ -62,17 +62,17 @@ const artworks: Artwork[] = [
   {
     id: 'shiva-cosmic-blue',
     src: '/images/artworks/shiva-cosmic-blue.jpg',
-    title: 'Shiva Cosmic Meditation',
+    title: 'Shiva — Cosmic Meditation',
     category: 'Paintings',
-    medium: 'WaterColor on Paper',
-    description: 'Lord Shiva in deep cosmic meditation, painted with galaxy-blue watercolour washes, celestial starfields, and crescent moon.',
+    medium: 'Watercolour on Paper',
+    description: 'Lord Shiva in deep cosmic meditation, painted with galaxy-blue watercolour washes, celestial starfields, and a crescent moon.',
   },
 
   // ── Fabric Art ─────────────────────────────────────────
   {
     id: 'agni-shiva-fabric',
     src: '/images/artworks/agni-shiva-fabric.jpg',
-    title: 'Agni Shiva Fabric Painting',
+    title: 'Agni Shiva',
     category: 'Fabric Art',
     medium: 'Fabric Painting on T-Shirt',
     description: 'Lord Shiva wielding the trishul, surrounded by roaring fire — hand-painted with fabric pigments directly onto a white t-shirt.',
@@ -82,17 +82,17 @@ const artworks: Artwork[] = [
   {
     id: 'shiva-kali-tattoo',
     src: '/images/artworks/shiva-kali-tattoo.jpg',
-    title: 'Shiva and Kali Tattoo',
+    title: 'Shiva & Kali',
     category: 'Tattoo Art',
-    medium: 'Tattoo Ink on Fake Skin',
-    description: 'Detailed tattoo needlework depicting serene Shiva and fierce Kali, practiced with precision needle shading on fake skin.',
+    medium: 'Tattoo Ink on Synthetic Skin',
+    description: 'Detailed tattoo needlework depicting serene Shiva and fierce Kali, practiced with precision needle shading on synthetic skin.',
   },
 
   // ── Sketches ───────────────────────────────────────────
   {
     id: 'krishna-watercolour',
     src: '/images/artworks/krishna-watercolour.jpg',
-    title: 'Krishna Watercolour Painting',
+    title: 'Krishna',
     category: 'Sketches',
     medium: 'Watercolour & Ink on Sketchbook',
     description: 'Young Krishna adorned with peacock feathers and gold jewellery, rendered in delicate watercolour washes with clean ink outlines.',
@@ -100,7 +100,7 @@ const artworks: Artwork[] = [
   {
     id: 'portrait-watercolour',
     src: '/images/artworks/portrait-watercolour.jpg',
-    title: 'Portrait Watercolour Painting',
+    title: 'Portrait Study',
     category: 'Sketches',
     medium: 'Watercolour on Paper',
     description: 'Expressive portrait capturing a joyful smile with subtle shading and fine hair detailing.',
@@ -108,7 +108,7 @@ const artworks: Artwork[] = [
   {
     id: 'aghor-shiva-pen',
     src: '/images/artworks/aghor-shiva-pen.jpg',
-    title: 'Aghor Shiva — Pen Sketch',
+    title: 'Aghor Shiva',
     category: 'Sketches',
     medium: 'Ink Pen on Notebook Paper',
     description: 'A dynamic pen sketch of Aghor Shiva dancing in the Tandava — wild hair, multiple arms, and fierce energy captured in fine linework.',
@@ -118,9 +118,9 @@ const artworks: Artwork[] = [
   {
     id: 'hanuman-wall-mural',
     src: '/images/artworks/hanuman-wall-mural.jpg',
-    title: 'Hanuman Wall Painting with Rama/Hanuman Flag',
+    title: 'Hanuman Wall Mural & Flag',
     category: 'Wall Art',
-    medium: 'Wall Painting & Flag Painting',
+    medium: 'Wall Mural & Acrylic on Fabric',
     description: 'A bold monochrome Hanuman mural painted directly on a wall, accompanied by a hand-painted Rama-Hanuman flag with Kannada script.',
   },
 ];

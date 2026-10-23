@@ -143,10 +143,10 @@ export const educationData: EducationItem[] = [
     details: 'Focus on full-stack software development, database systems, AI engineering, and computer networking.'
   },
   {
-    degree: 'Pre-University (Commerce / Computer Science)',
+    degree: 'Pre-University Course (Commerce with Computer Science)',
     institution: 'Krupanidhi PU College, Bengaluru',
     period: '2021 – 2023',
-    details: 'Computer Science, Economics, Business Studies, And Accountancy.'
+    details: 'Computer Science, Economics, Business Studies, and Accountancy.'
   }
 ];
 
