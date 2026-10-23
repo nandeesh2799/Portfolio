@@ -13,6 +13,7 @@ import {
   ToggleRight
 } from 'lucide-react';
 import { skillGroups } from '../data/portfolioData';
+import { TechIcon } from './TechIcon';
 
 interface SectionProps {
   className?: string;
@@ -100,14 +101,14 @@ export const SkillsSection = forwardRef<HTMLElement, SectionProps>(
                   </div>
                 </div>
 
-                {/* Skills Badges */}
+                {/* Skills Badges with Tech Logos */}
                 <div className="flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
                     <span 
                       key={skill}
-                      className="px-3 py-1.5 rounded-lg bg-bg-secondary hover:bg-bg-tertiary border border-bg-tertiary hover:border-terminal-green/50 text-slate-300 hover:text-white font-mono text-xs transition-all cursor-default flex items-center gap-1.5"
+                      className="px-3 py-1.5 rounded-lg bg-bg-secondary hover:bg-bg-tertiary border border-bg-tertiary hover:border-terminal-green/50 text-slate-300 hover:text-white font-mono text-xs transition-all cursor-default flex items-center gap-2 group/skill"
                     >
-                      <span className="w-1 h-1 rounded-full bg-terminal-green" />
+                      <TechIcon name={skill} className="w-3.5 h-3.5 shrink-0 transition-transform group-hover/skill:scale-110" />
                       <span>{skill}</span>
                     </span>
                   ))}
