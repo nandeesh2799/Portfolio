@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { 
-  ArrowRight, 
-  FileDown, 
-  Github, 
-  Linkedin, 
-  Terminal, 
-  Code2, 
+import React, { useState, useEffect, forwardRef } from 'react';
+import {
+  ArrowRight,
+  FileDown,
+  Github,
+  Linkedin,
+  Terminal,
+  Code2,
   LayoutGrid,
   ChevronRight
 } from 'lucide-react';
@@ -15,13 +15,28 @@ import { CodeEditorWindow } from './CodeEditorWindow';
 
 interface HeroDesktopProps {
   onNavigateSection: (sectionId: string) => void;
+  className?: string;
 }
 
-export const HeroDesktop: React.FC<HeroDesktopProps> = ({ onNavigateSection }) => {
+export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
+  ({ onNavigateSection, className = '' }, ref) => {
   const [activeWindowTab, setActiveWindowTab] = useState<'terminal' | 'code'>('terminal');
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 1024;
 
   return (
-    <section id="hero" className="relative min-h-[96vh] pt-16 pb-12 flex flex-col justify-center overflow-hidden">
+    <section
+      ref={ref}
+      id="hero"
+      className={`relative min-h-[96vh] pt-16 pb-12 flex flex-col justify-center overflow-hidden ${className}`}
+    >
       {/* Subtle Background Grid & Ambient Glows */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none" 
@@ -68,16 +83,18 @@ export const HeroDesktop: React.FC<HeroDesktopProps> = ({ onNavigateSection }) =
           <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
             <button
               onClick={() => onNavigateSection('projects')}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold bg-terminal-green text-[#080B10] hover:shadow-glow-green hover:-translate-y-0.5 transition-all"
+              className="magnetic-btn inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold bg-terminal-green text-[#080B10] hover:shadow-glow-green hover:-translate-y-0.5 transition-all focus-visible-ring focus-visible-ring-green active:scale-[0.98]"
             >
               <span>Explore My Projects</span>
-              <ArrowRight className="w-4 h-4" />
+              <span className="magnetic-icon inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/10">
+                <ArrowRight className="w-4 h-4" />
+              </span>
             </button>
 
             <a
               href="./resumes/Nandeesh_NK_Resume_AI.pdf"
               download="Nandeesh_NK_Resume_AI.pdf"
-              className="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-medium bg-bg-secondary hover:bg-bg-tertiary border border-bg-tertiary hover:border-terminal-cyan/50 text-slate-200 hover:text-white transition-all"
+              className="inline-flex items-center gap-2 px-4 py-3 rounded-xl font-medium bg-bg-secondary hover:bg-bg-tertiary border border-bg-tertiary hover:border-terminal-cyan/50 text-slate-200 hover:text-white transition-all focus-visible-ring focus-visible-ring-cyan"
             >
               <FileDown className="w-4 h-4 text-terminal-cyan" />
               <span>Download Resume</span>
@@ -149,16 +166,20 @@ export const HeroDesktop: React.FC<HeroDesktopProps> = ({ onNavigateSection }) =
             </div>
           </div>
 
-          {/* Desktop Tiling Grid View */}
+          {/* Desktop Tiling Grid View - On mobile, show only active tab to save space */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
             {/* Primary Interactive Terminal Window (7 cols) */}
             <div className="lg:col-span-7 flex flex-col min-h-[460px]">
-              <TerminalComponent onNavigateSection={onNavigateSection} />
+              {(activeWindowTab === 'terminal' || !isMobile) && (
+                <TerminalComponent onNavigateSection={onNavigateSection} />
+              )}
             </div>
 
             {/* Secondary Code Editor Window (5 cols) */}
             <div className="lg:col-span-5 flex flex-col min-h-[460px]">
-              <CodeEditorWindow />
+              {(activeWindowTab === 'code' || !isMobile) && (
+                <CodeEditorWindow />
+              )}
             </div>
           </div>
 
@@ -167,4 +188,8 @@ export const HeroDesktop: React.FC<HeroDesktopProps> = ({ onNavigateSection }) =
       </div>
     </section>
   );
-};
+});
+
+HeroDesktop.displayName = 'HeroDesktop';
+
+export default HeroDesktop;

@@ -1,24 +1,33 @@
-import React from 'react';
-import { 
-  GraduationCap, 
-  Award, 
-  ShieldCheck, 
-  Terminal, 
-  Languages, 
-  CheckCircle2, 
+import React, { forwardRef } from 'react';
+import {
+  GraduationCap,
+  Award,
+  ShieldCheck,
+  Terminal,
+  Languages,
+  CheckCircle2,
   Calendar,
   FileText
 } from 'lucide-react';
-import { 
-  educationData, 
-  certificationsData, 
-  achievementsData, 
-  developerProfile 
+import {
+  educationData,
+  certificationsData,
+  achievementsData,
+  developerProfile
 } from '../data/portfolioData';
 
-export const DossierSection: React.FC = () => {
+interface SectionProps {
+  className?: string;
+}
+
+export const DossierSection = forwardRef<HTMLElement, SectionProps>(
+  ({ className = '' }, ref) => {
   return (
-    <section id="dossier" className="py-24 relative border-t border-bg-tertiary">
+    <section
+      ref={ref}
+      id="dossier"
+      className={`py-24 relative border-t border-bg-tertiary ${className}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -159,4 +168,8 @@ export const DossierSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+DossierSection.displayName = 'DossierSection';
+
+export default DossierSection;

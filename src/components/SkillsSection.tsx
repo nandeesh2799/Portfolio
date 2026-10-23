@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { 
-  Code2, 
-  Layers, 
-  Database, 
-  Cpu, 
-  Wrench, 
-  Terminal, 
-  Check, 
+import React, { useState, forwardRef } from 'react';
+import {
+  Code2,
+  Layers,
+  Database,
+  Cpu,
+  Wrench,
+  Terminal,
+  Check,
   Copy,
   Sparkles,
   ToggleLeft,
@@ -14,7 +14,12 @@ import {
 } from 'lucide-react';
 import { skillGroups } from '../data/portfolioData';
 
-export const SkillsSection: React.FC = () => {
+interface SectionProps {
+  className?: string;
+}
+
+export const SkillsSection = forwardRef<HTMLElement, SectionProps>(
+  ({ className = '' }, ref) => {
   const [viewMode, setViewMode] = useState<'matrix' | 'terminal'>('matrix');
   const [copied, setCopied] = useState(false);
 
@@ -36,7 +41,11 @@ export const SkillsSection: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="py-24 relative border-t border-bg-tertiary">
+    <section
+      ref={ref}
+      id="skills"
+      className={`py-24 relative border-t border-bg-tertiary ${className}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -138,4 +147,8 @@ export const SkillsSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+SkillsSection.displayName = 'SkillsSection';
+
+export default SkillsSection;

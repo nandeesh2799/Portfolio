@@ -25,19 +25,19 @@ export const FloatingTerminalModal: React.FC<FloatingTerminalModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#080B10]/80 backdrop-blur-md animate-in fade-in duration-150"
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#080B10]/80 backdrop-blur-md animate-in fade-in duration-150 lg:items-center"
       onClick={onClose}
     >
-      <div 
-        className="w-full max-w-3xl h-[560px] shadow-2xl"
+      <div
+        className="w-full max-w-3xl h-[560px] shadow-2xl bottom-sheet lg:rounded-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <TerminalComponent 
+        <TerminalComponent
           onNavigateSection={(sec) => {
             onNavigateSection(sec);
             onClose();
-          }} 
+          }}
           isStandalone={true}
           onClose={onClose}
         />

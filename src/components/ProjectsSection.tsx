@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { 
-  Terminal, 
-  Github, 
-  ExternalLink, 
-  ArrowUpRight, 
-  ShoppingCart, 
-  Bot, 
-  FileSpreadsheet, 
-  Smartphone, 
-  CheckCircle2, 
-  X, 
-  Layers, 
-  Cpu, 
+import React, { useState, forwardRef } from 'react';
+import {
+  Terminal,
+  Github,
+  ExternalLink,
+  ArrowUpRight,
+  ShoppingCart,
+  Bot,
+  FileSpreadsheet,
+  Smartphone,
+  CheckCircle2,
+  X,
+  Layers,
+  Cpu,
   ShieldAlert,
   ArrowRight,
   Maximize2
@@ -19,7 +19,12 @@ import {
 import { Project } from '../types';
 import { projectsData } from '../data/portfolioData';
 
-export const ProjectsSection: React.FC = () => {
+interface SectionProps {
+  className?: string;
+}
+
+export const ProjectsSection = forwardRef<HTMLElement, SectionProps>(
+  ({ className = '' }, ref) => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const getProjectIcon = (name: string) => {
@@ -33,7 +38,11 @@ export const ProjectsSection: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-24 relative border-t border-bg-tertiary">
+    <section
+      ref={ref}
+      id="projects"
+      className={`py-24 relative border-t border-bg-tertiary ${className}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -142,7 +151,7 @@ export const ProjectsSection: React.FC = () => {
               <div className="p-4 bg-bg-secondary/70 border-t border-bg-tertiary flex items-center justify-between gap-3 font-mono text-xs">
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="inline-flex items-center gap-1.5 text-terminal-cyan hover:text-white transition-colors font-semibold"
+                  className="inline-flex items-center gap-1.5 text-terminal-cyan hover:text-white transition-colors font-semibold focus-visible-ring focus-visible-ring-cyan"
                 >
                   <Maximize2 className="w-3.5 h-3.5" />
                   <span>Inspect Architecture Window</span>
@@ -153,7 +162,7 @@ export const ProjectsSection: React.FC = () => {
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-tertiary hover:bg-terminal-green/20 text-slate-200 hover:text-terminal-green border border-bg-tertiary hover:border-terminal-green/40 transition-all"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-tertiary hover:bg-terminal-green/20 text-slate-200 hover:text-terminal-green border border-bg-tertiary hover:border-terminal-green/40 transition-all focus-visible-ring focus-visible-ring-green"
                   >
                     <Github className="w-3.5 h-3.5" />
                     <span>Source</span>
@@ -241,7 +250,7 @@ export const ProjectsSection: React.FC = () => {
                       href={selectedProject.repoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold bg-terminal-green text-[#080B10] hover:shadow-glow-green transition-all"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold bg-terminal-green text-[#080B10] hover:shadow-glow-green transition-all focus-visible-ring focus-visible-ring-green"
                     >
                       <Github className="w-4 h-4" />
                       <span>Inspect GitHub Repository</span>
@@ -252,7 +261,7 @@ export const ProjectsSection: React.FC = () => {
                   )}
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="px-4 py-2.5 rounded-xl bg-bg-secondary hover:bg-bg-tertiary text-slate-300 border border-bg-tertiary transition-colors"
+                    className="px-4 py-2.5 rounded-xl bg-bg-secondary hover:bg-bg-tertiary text-slate-300 border border-bg-tertiary transition-colors focus-visible-ring focus-visible-ring-cyan"
                   >
                     Close Window
                   </button>
@@ -265,4 +274,8 @@ export const ProjectsSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+ProjectsSection.displayName = 'ProjectsSection';
+
+export default ProjectsSection;

@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Terminal, User } from 'lucide-react';
 import { developerProfile } from '../data/portfolioData';
 
-export const AboutSection: React.FC = () => {
+interface SectionProps {
+  className?: string;
+}
+
+export const AboutSection = forwardRef<HTMLElement, SectionProps>(
+  ({ className = '' }, ref) => {
   return (
-    <section id="about" className="py-24 relative border-t border-bg-tertiary">
+    <section
+      ref={ref}
+      id="about"
+      className={`py-24 relative border-t border-bg-tertiary ${className}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -117,4 +126,8 @@ export const AboutSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+AboutSection.displayName = 'AboutSection';
+
+export default AboutSection;

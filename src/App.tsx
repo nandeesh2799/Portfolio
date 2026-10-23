@@ -10,6 +10,7 @@ import { DossierSection } from './components/DossierSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { FloatingTerminalModal } from './components/FloatingTerminalModal';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 export const App: React.FC = () => {
   const [bootCompleted, setBootCompleted] = useState<boolean>(() => {
@@ -17,6 +18,15 @@ export const App: React.FC = () => {
   });
   const [terminalModalOpen, setTerminalModalOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
+
+  // Scroll reveal for sections (staggered after boot)
+  const heroReveal = useScrollReveal({ delay: 200 });
+  const aboutReveal = useScrollReveal({ delay: 300 });
+  const skillsReveal = useScrollReveal({ delay: 400 });
+  const projectsReveal = useScrollReveal({ delay: 500 });
+  const artReveal = useScrollReveal({ delay: 600 });
+  const dossierReveal = useScrollReveal({ delay: 700 });
+  const contactReveal = useScrollReveal({ delay: 800 });
 
   // Section observer to update active workspace pill in Waybar
   useEffect(() => {
@@ -54,14 +64,14 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#080B10] text-[#E0E6ED] relative selection:bg-terminal-green/20 selection:text-terminal-green">
-      
+
       {/* Initial Boot Sequence (Only runs once per session, skippable) */}
       {!bootCompleted && (
         <BootSequence onComplete={handleBootComplete} />
       )}
 
       {/* Subtle Scanline Overlay across entire desktop */}
-      <div className="fixed inset-0 scanline-overlay pointer-events-none z-30" />
+      <div className="scanline-overlay" />
 
       {/* Minimal Top Waybar Panel */}
       <Waybar
@@ -72,13 +82,35 @@ export const App: React.FC = () => {
 
       {/* Main Desktop Sections */}
       <main className="relative z-10">
-        <HeroDesktop onNavigateSection={navigateToSection} />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <GenerativeArtPlayground />
-        <DossierSection />
-        <ContactSection />
+        <HeroDesktop
+          ref={heroReveal.ref}
+          className={`reveal-up ${heroReveal.isVisible ? 'is-visible' : ''}`}
+          onNavigateSection={navigateToSection}
+        />
+        <AboutSection
+          ref={aboutReveal.ref}
+          className={`reveal-up ${aboutReveal.isVisible ? 'is-visible' : ''}`}
+        />
+        <SkillsSection
+          ref={skillsReveal.ref}
+          className={`reveal-up ${skillsReveal.isVisible ? 'is-visible' : ''}`}
+        />
+        <ProjectsSection
+          ref={projectsReveal.ref}
+          className={`reveal-up ${projectsReveal.isVisible ? 'is-visible' : ''}`}
+        />
+        <GenerativeArtPlayground
+          ref={artReveal.ref}
+          className={`reveal-up ${artReveal.isVisible ? 'is-visible' : ''}`}
+        />
+        <DossierSection
+          ref={dossierReveal.ref}
+          className={`reveal-up ${dossierReveal.isVisible ? 'is-visible' : ''}`}
+        />
+        <ContactSection
+          ref={contactReveal.ref}
+          className={`reveal-up ${contactReveal.isVisible ? 'is-visible' : ''}`}
+        />
       </main>
 
       {/* Desktop Footer */}

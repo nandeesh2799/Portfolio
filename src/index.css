@@ -10,6 +10,156 @@
   --color-secondary: #A970FF;
   --color-highlight: #FF4FD8;
   --border-active: #39FF88;
+  --color-muted: #A8B5C6; /* WCAG AA compliant on #080B10 (4.6:1) */
+  --color-muted-rgb: 168, 181, 198;
+}
+
+/* Reduced Motion - Respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  .scanline-overlay {
+    display: none !important;
+  }
+  .glitch-text::before,
+  .glitch-text::after {
+    animation: none !important;
+  }
+  .animate-blink,
+  .animate-pulse,
+  .animate-pulse-subtle,
+  .animate-scanline {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Visible - Accessible focus states */
+.focus-visible-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring-color, #39FF88), 0 0 0 4px #080B10;
+  outline-offset: 2px;
+}
+
+.focus-visible-ring-green:focus-visible {
+  --ring-color: #39FF88;
+}
+
+.focus-visible-ring-cyan:focus-visible {
+  --ring-color: #00F5FF;
+}
+
+.focus-visible-ring-purple:focus-visible {
+  --ring-color: #A970FF;
+}
+
+.focus-visible-ring-pink:focus-visible {
+  --ring-color: #FF4FD8;
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-start infinite;
+}
+
+/* Scanline overlay as fixed pseudo-element for performance */
+.scanline-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  background: linear-gradient(
+    rgba(18, 24, 38, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+}
+
+/* Double-bezel card architecture */
+.bezel-shell {
+  @apply relative p-[6px] bg-black/5 ring-1 ring-white/5 rounded-[1.5rem];
+}
+
+.bezel-core {
+  @apply bg-[#0D121B] rounded-[calc(1.5rem-6px)] border border-white/5;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.08);
+}
+
+/* Smaller bezel variant for nested cards */
+.bezel-shell-sm {
+  @apply relative p-[4px] bg-black/5 ring-1 ring-white/5 rounded-[1rem];
+}
+
+.bezel-core-sm {
+  @apply bg-[#0D121B] rounded-[calc(1rem-4px)] border border-white/5;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.06);
+}
+
+/* Magnetic button hover effect */
+.magnetic-btn {
+  @apply relative overflow-hidden rounded-full transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)];
+}
+
+.magnetic-btn:active {
+  @apply scale-[0.98];
+}
+
+.magnetic-btn .magnetic-icon {
+  @apply transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)];
+}
+
+.magnetic-btn:hover .magnetic-icon {
+  @apply translate-x-1 -translate-y-[1px] scale-105;
+}
+
+/* Scroll reveal animations */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(24px) blur(8px);
+  transition: opacity 800ms cubic-bezier(0.32,0.72,0,1),
+              transform 800ms cubic-bezier(0.32,0.72,0,1),
+              filter 800ms cubic-bezier(0.32,0.72,0,1);
+}
+
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0) blur(0);
+}
+
+/* Staggered reveal delays */
+.reveal-delay-1 { transition-delay: 100ms; }
+.reveal-delay-2 { transition-delay: 200ms; }
+.reveal-delay-3 { transition-delay: 300ms; }
+.reveal-delay-4 { transition-delay: 400ms; }
+.reveal-delay-5 { transition-delay: 500ms; }
+.reveal-delay-6 { transition-delay: 600ms; }
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mobile bottom sheet */
+@media (max-width: 1023px) {
+  .bottom-sheet {
+    @apply fixed bottom-0 left-0 right-0 rounded-t-2xl max-h-[85vh] border-t-0;
+  }
 }
 
 [data-theme="cyberpunk"] {

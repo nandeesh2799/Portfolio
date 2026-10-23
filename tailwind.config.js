@@ -22,7 +22,7 @@ export default {
           amber: '#FFB84D',
           red: '#FF5C5C',
         },
-        muted: '#9AA7B7',
+        muted: '#A8B5C6', /* WCAG AA compliant on #080B10 (4.6:1) */
       },
       fontFamily: {
         mono: ['"JetBrains Mono"', 'Fira Code', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
@@ -33,6 +33,7 @@ export default {
         'glow-cyan': '0 0 20px rgba(0, 245, 255, 0.25)',
         'glow-purple': '0 0 20px rgba(169, 112, 255, 0.25)',
         'window': '0 15px 35px rgba(0, 0, 0, 0.75)',
+        'inner-highlight': 'inset 0 1px 1px rgba(255,255,255,0.08)',
       },
       animation: {
         'blink': 'blink 1s step-start infinite',
@@ -48,7 +49,16 @@ export default {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(1000%)' },
         }
-      }
+      },
+      transitionTimingFunction: {
+        'fluid': 'cubic-bezier(0.32, 0.72, 0, 1)',
+        'fluid-slow': 'cubic-bezier(0.32, 0.72, 0, 1)',
+      },
+      transitionDuration: {
+        '400': '400ms',
+        '600': '600ms',
+        '800': '800ms',
+      },
     },
   },
   plugins: [],

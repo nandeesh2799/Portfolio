@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, forwardRef } from 'react';
 import {
   Sparkles,
   X,
@@ -6,6 +6,10 @@ import {
   ChevronRight,
   Maximize2,
 } from 'lucide-react';
+
+interface SectionProps {
+  className?: string;
+}
 
 /* ─── Artwork data ──────────────────────────────────────────── */
 interface Artwork {
@@ -234,7 +238,8 @@ const Lightbox: React.FC<LightboxProps> = ({ artwork, all, onClose, onNavigate }
 };
 
 /* ─── Main component ────────────────────────────────────────── */
-export const GenerativeArtPlayground: React.FC = () => {
+export const GenerativeArtPlayground = forwardRef<HTMLElement, SectionProps>(
+  ({ className = '' }, ref) => {
   const [lightboxArtwork, setLightboxArtwork] = useState<Artwork | null>(null);
 
   const handleNavigate = useCallback(
@@ -248,7 +253,11 @@ export const GenerativeArtPlayground: React.FC = () => {
   );
 
   return (
-    <section id="art" className="py-24 relative border-t border-bg-tertiary">
+    <section
+      ref={ref}
+      id="art"
+      className={`py-24 relative border-t border-bg-tertiary ${className}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-10 space-y-2">
@@ -321,4 +330,8 @@ export const GenerativeArtPlayground: React.FC = () => {
       )}
     </section>
   );
-};
+});
+
+GenerativeArtPlayground.displayName = 'GenerativeArtPlayground';
+
+export default GenerativeArtPlayground;

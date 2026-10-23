@@ -115,7 +115,7 @@ export const Waybar: React.FC<WaybarProps> = ({
           <a
             href="./resumes/Nandeesh_NK_Resume_AI.pdf"
             download="Nandeesh_NK_Resume_AI.pdf"
-            className="px-2.5 py-1 rounded bg-terminal-green text-[#080B10] font-bold hover:shadow-glow-green transition-all flex items-center gap-1 text-[11px]"
+            className="px-2.5 py-1 rounded bg-terminal-green text-[#080B10] font-bold hover:shadow-glow-green transition-all flex items-center gap-1 text-[11px] focus-visible-ring focus-visible-ring-green"
             title="Download Verified Resume PDF"
           >
             <FileDown className="w-3 h-3" />

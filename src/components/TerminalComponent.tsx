@@ -407,6 +407,7 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
             autoComplete="off"
             aria-label="Terminal command prompt"
           />
+          <span className="w-2 h-4 bg-terminal-green animate-blink shrink-0" aria-hidden="true" />
           <CornerDownLeft className="w-3 h-3 text-slate-600 shrink-0" />
         </div>
 

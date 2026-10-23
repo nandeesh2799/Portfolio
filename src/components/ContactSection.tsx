@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import { 
-  Terminal, 
-  Mail, 
-  Github, 
-  Linkedin, 
-  MapPin, 
-  Send, 
-  CheckCircle2, 
-  AlertCircle, 
-  Copy, 
-  Check, 
+import React, { useState, forwardRef } from 'react';
+import {
+  Terminal,
+  Mail,
+  Github,
+  Linkedin,
+  MapPin,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  Copy,
+  Check,
   FileDown,
   ArrowUpRight
 } from 'lucide-react';
 import { developerProfile } from '../data/portfolioData';
 
-export const ContactSection: React.FC = () => {
+interface SectionProps {
+  className?: string;
+}
+
+export const ContactSection = forwardRef<HTMLElement, SectionProps>(
+  ({ className = '' }, ref) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -58,7 +63,11 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative border-t border-bg-tertiary">
+    <section
+      ref={ref}
+      id="contact"
+      className={`py-24 relative border-t border-bg-tertiary ${className}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -154,7 +163,7 @@ export const ContactSection: React.FC = () => {
                   <a
                     href="./resumes/Nandeesh_NK_Resume_AI.pdf"
                     download="Nandeesh_NK_Resume_AI.pdf"
-                    className="w-full py-3 rounded-xl bg-terminal-green/10 hover:bg-terminal-green/20 border border-terminal-green/40 text-terminal-green font-bold transition-all flex items-center justify-center gap-2"
+                    className="w-full py-3 rounded-xl bg-terminal-green/10 hover:bg-terminal-green/20 border border-terminal-green/40 text-terminal-green font-bold transition-all flex items-center justify-center gap-2 focus-visible-ring focus-visible-ring-green"
                   >
                     <FileDown className="w-4 h-4" />
                     <span>Download ATS Resume (PDF)</span>
@@ -247,10 +256,12 @@ export const ContactSection: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 rounded-xl font-bold bg-terminal-green text-[#080B10] hover:shadow-glow-green hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="magnetic-btn w-full py-3.5 rounded-full font-bold bg-terminal-green text-[#080B10] hover:shadow-glow-green hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 focus-visible-ring focus-visible-ring-green active:scale-[0.98]"
               >
-                <Send className="w-4 h-4" />
                 <span>{isSubmitting ? 'Dispatching...' : 'Dispatch Message Transmission'}</span>
+                <span className="magnetic-icon inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/10">
+                  <Send className="w-4 h-4" />
+                </span>
               </button>
             </form>
           </div>
@@ -260,4 +271,8 @@ export const ContactSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+ContactSection.displayName = 'ContactSection';
+
+export default ContactSection;
