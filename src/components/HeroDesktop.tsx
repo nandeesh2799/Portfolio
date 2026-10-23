@@ -12,11 +12,12 @@ import { TerminalComponent } from './TerminalComponent';
 
 interface HeroDesktopProps {
   onNavigateSection: (sectionId: string) => void;
+  onOpenResume?: () => void;
   className?: string;
 }
 
 export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
-  ({ onNavigateSection, className = '' }, ref) => {
+  ({ onNavigateSection, onOpenResume, className = '' }, ref) => {
 
   return (
     <section
@@ -200,7 +201,10 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
 
           {/* Primary Interactive Terminal Window (Full-Width) */}
           <div className="w-full flex flex-col min-h-[460px]">
-            <TerminalComponent onNavigateSection={onNavigateSection} />
+            <TerminalComponent
+              onNavigateSection={onNavigateSection}
+              onOpenResume={onOpenResume}
+            />
           </div>
 
         </div>

@@ -21,10 +21,11 @@ import {
 
 interface SectionProps {
   className?: string;
+  onOpenResume?: () => void;
 }
 
 export const DossierSection = forwardRef<HTMLElement, SectionProps>(
-  ({ className = '' }, ref) => {
+  ({ className = '', onOpenResume }, ref) => {
   return (
     <section
       ref={ref}

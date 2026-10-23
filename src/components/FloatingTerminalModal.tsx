@@ -5,12 +5,14 @@ interface FloatingTerminalModalProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigateSection: (sectionId: string) => void;
+  onOpenResume?: () => void;
 }
 
 export const FloatingTerminalModal: React.FC<FloatingTerminalModalProps> = ({
   isOpen,
   onClose,
   onNavigateSection,
+  onOpenResume,
 }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -37,6 +39,12 @@ export const FloatingTerminalModal: React.FC<FloatingTerminalModalProps> = ({
           onNavigateSection={(sec) => {
             onNavigateSection(sec);
             onClose();
+          }}
+          onOpenResume={() => {
+            if (onOpenResume) {
+              onClose();
+              onOpenResume();
+            }
           }}
           isStandalone={true}
           onClose={onClose}

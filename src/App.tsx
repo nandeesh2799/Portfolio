@@ -10,6 +10,7 @@ import { DossierSection } from './components/DossierSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { FloatingTerminalModal } from './components/FloatingTerminalModal';
+import { ResumeModal } from './components/ResumeModal';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 export const App: React.FC = () => {
@@ -17,6 +18,7 @@ export const App: React.FC = () => {
     return sessionStorage.getItem('nandeeshos_booted') === 'true';
   });
   const [terminalModalOpen, setTerminalModalOpen] = useState<boolean>(false);
+  const [resumeModalOpen, setResumeModalOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
 
   // Scroll reveal for sections (staggered after boot)
@@ -76,6 +78,7 @@ export const App: React.FC = () => {
       {/* Minimal Top Waybar Panel */}
       <Waybar
         onOpenTerminal={() => setTerminalModalOpen(true)}
+        onOpenResume={() => setResumeModalOpen(true)}
         onNavigate={navigateToSection}
         activeSection={activeSection}
       />
@@ -86,6 +89,7 @@ export const App: React.FC = () => {
           ref={heroReveal.ref}
           className={`reveal-up ${heroReveal.isVisible ? 'is-visible' : ''}`}
           onNavigateSection={navigateToSection}
+          onOpenResume={() => setResumeModalOpen(true)}
         />
         <AboutSection
           ref={aboutReveal.ref}
@@ -106,10 +110,12 @@ export const App: React.FC = () => {
         <DossierSection
           ref={dossierReveal.ref}
           className={`reveal-up ${dossierReveal.isVisible ? 'is-visible' : ''}`}
+          onOpenResume={() => setResumeModalOpen(true)}
         />
         <ContactSection
           ref={contactReveal.ref}
           className={`reveal-up ${contactReveal.isVisible ? 'is-visible' : ''}`}
+          onOpenResume={() => setResumeModalOpen(true)}
         />
       </main>
 
@@ -121,6 +127,13 @@ export const App: React.FC = () => {
         isOpen={terminalModalOpen}
         onClose={() => setTerminalModalOpen(false)}
         onNavigateSection={navigateToSection}
+        onOpenResume={() => setResumeModalOpen(true)}
+      />
+
+      {/* Linux Document Viewer Resume Modal */}
+      <ResumeModal
+        isOpen={resumeModalOpen}
+        onClose={() => setResumeModalOpen(false)}
       />
 
     </div>

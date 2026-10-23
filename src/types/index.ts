@@ -50,5 +50,6 @@ export interface AchievementItem {
   event: string;
   description: string;
   spotlight?: boolean;
+  badge?: string;
   highlights?: string[];
 }

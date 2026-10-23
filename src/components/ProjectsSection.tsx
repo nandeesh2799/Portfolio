@@ -134,6 +134,31 @@ export const ProjectsSection = forwardRef<HTMLElement, SectionProps>(
                   )}
                 </div>
 
+                {/* Architecture Pipeline Strip */}
+                {project.architectureWorkflow && (
+                  <div className="p-2.5 rounded-xl bg-bg-secondary/70 border border-bg-tertiary font-mono text-[11px] space-y-1">
+                    <div className="flex items-center justify-between text-muted text-[10px]">
+                      <span className="text-terminal-cyan font-bold flex items-center gap-1">
+                        <Cpu className="w-3 h-3 text-terminal-green" />
+                        {project.architectureWorkflow.label}
+                      </span>
+                      <span>{project.architectureWorkflow.steps.length} STAGES</span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-1 text-[10px] text-slate-300 pt-0.5">
+                      {project.architectureWorkflow.steps.map((st, sIdx) => (
+                        <React.Fragment key={sIdx}>
+                          <span className="px-1.5 py-0.5 rounded bg-bg-tertiary text-slate-200">
+                            {st}
+                          </span>
+                          {sIdx < project.architectureWorkflow!.steps.length - 1 && (
+                            <ArrowRight className="w-2.5 h-2.5 text-muted shrink-0" />
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Tech Stack Pills */}
                 <div className="pt-3 border-t border-bg-tertiary flex flex-wrap gap-1.5">
                   {project.tech.map((t) => (
@@ -213,6 +238,57 @@ export const ProjectsSection = forwardRef<HTMLElement, SectionProps>(
                     {selectedProject.description}
                   </p>
                 </div>
+
+                {/* Architecture Pipeline Flow */}
+                {selectedProject.architectureWorkflow && (
+                  <div className="p-4 rounded-xl bg-bg-secondary/70 border border-bg-tertiary space-y-2.5">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-terminal-cyan font-bold flex items-center gap-1.5">
+                        <Cpu className="w-3.5 h-3.5 text-terminal-green" />
+                        {selectedProject.architectureWorkflow.label}
+                      </span>
+                      <span className="text-[10px] text-terminal-green bg-terminal-green/10 border border-terminal-green/30 px-2 py-0.5 rounded-full">
+                        PIPELINE
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 pt-1">
+                      {selectedProject.architectureWorkflow.steps.map((st, sIdx) => (
+                        <div
+                          key={sIdx}
+                          className="p-2.5 rounded-lg bg-bg-card border border-bg-tertiary flex flex-col justify-between text-center group hover:border-terminal-green/40 transition-colors"
+                        >
+                          <span className="text-[9px] text-terminal-cyan font-mono block mb-1">
+                            0{sIdx + 1}
+                          </span>
+                          <span className="text-xs text-slate-100 font-sans font-medium">
+                            {st}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Architecture Highlights */}
+                {selectedProject.architectureHighlights && selectedProject.architectureHighlights.length > 0 && (
+                  <div className="space-y-2">
+                    <span className="text-terminal-amber font-bold text-xs uppercase tracking-wider block">
+                      Engineering &amp; Security Highlights:
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      {selectedProject.architectureHighlights.map((hl, hlIdx) => (
+                        <div
+                          key={hlIdx}
+                          className="p-2.5 rounded-xl bg-bg-secondary/60 border border-bg-tertiary text-xs text-slate-200 font-sans leading-snug flex items-start gap-1.5"
+                        >
+                          <span className="text-terminal-green font-bold">›</span>
+                          <span>{hl}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* All Features */}
                 <div className="space-y-2 bg-bg-secondary/60 p-4 rounded-xl border border-bg-tertiary">

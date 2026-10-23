@@ -3,6 +3,7 @@ import {
   Terminal,
   Clock,
   FileDown,
+  FileText,
   Sparkles,
   Code2,
   FolderGit2,
@@ -14,12 +15,14 @@ import { developerProfile } from '../data/portfolioData';
 
 interface WaybarProps {
   onOpenTerminal: () => void;
+  onOpenResume?: () => void;
   onNavigate: (sectionId: string) => void;
   activeSection: string;
 }
 
 export const Waybar: React.FC<WaybarProps> = ({
   onOpenTerminal,
+  onOpenResume,
   onNavigate,
   activeSection
 }) => {
@@ -112,15 +115,27 @@ export const Waybar: React.FC<WaybarProps> = ({
             <span>{time || '00:00:00'}</span>
           </div>
 
-          {/* Resume PDF Download */}
+          {/* Resume PDF Actions */}
+          {onOpenResume && (
+            <button
+              type="button"
+              onClick={onOpenResume}
+              className="px-2.5 py-1 rounded bg-bg-secondary hover:bg-terminal-cyan/20 text-terminal-cyan border border-bg-tertiary hover:border-terminal-cyan/50 flex items-center gap-1.5 transition-all text-[11px]"
+              title="Preview Verified Resume PDF"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline font-semibold">Resume</span>
+            </button>
+          )}
+
           <a
-            href="./resumes/Nandeesh_NK_Resume_AI.pdf"
-            download="Nandeesh_NK_Resume_AI.pdf"
+            href="./resumes/Nandeesh_Resume.pdf"
+            download="Nandeesh_Resume.pdf"
             className="px-2.5 py-1 rounded bg-terminal-green text-[#080B10] font-bold hover:shadow-glow-green transition-all flex items-center gap-1 text-[11px] focus-visible-ring focus-visible-ring-green"
-            title="Download Verified Resume PDF"
+            title="Download Verified Resume PDF (54 KB)"
           >
             <FileDown className="w-3 h-3" />
-            <span className="hidden sm:inline">Resume</span>
+            <span className="hidden sm:inline">PDF</span>
           </a>
 
         </div>

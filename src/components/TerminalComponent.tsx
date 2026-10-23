@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal as TerminalIcon, Maximize2, Minimize2, X, RefreshCw, CornerDownLeft } from 'lucide-react';
-import { developerProfile, projectsData, skillGroups } from '../data/portfolioData';
+import { Terminal as TerminalIcon, Maximize2, Minimize2, X, RefreshCw, CornerDownLeft, FileText, Phone, Award } from 'lucide-react';
+import { developerProfile, projectsData, skillGroups, educationData, certificationsData, achievementsData } from '../data/portfolioData';
 
 interface TerminalComponentProps {
   onNavigateSection?: (sectionId: string) => void;
+  onOpenResume?: () => void;
   isStandalone?: boolean;
   onClose?: () => void;
 }
@@ -15,6 +16,7 @@ interface CommandEntry {
 
 export const TerminalComponent: React.FC<TerminalComponentProps> = ({
   onNavigateSection,
+  onOpenResume,
   isStandalone = false,
   onClose
 }) => {
@@ -27,8 +29,9 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const availableCommands = [
-    'help', 'whoami', 'neofetch', 'ls', 'ls projects/', 'cat about.txt', 
-    'cat skills.txt', 'pwd', 'cd projects', 'cd skills', 'cd about', 
+    'help', 'whoami', 'neofetch', 'ls', 'ls projects/', 'cat about.txt',
+    'cat skills.txt', 'cat resume.pdf', 'resume', 'phone', 'hackathon',
+    'education', 'certs', 'pwd', 'cd projects', 'cd skills', 'cd about',
     'cd contact', './art.sh', 'sudo hire-me', 'clear', 'date', 'history'
   ];
 
@@ -84,15 +87,17 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
               <div><span className="text-terminal-green font-semibold">whoami</span> - Developer summary &amp; identity</div>
               <div><span className="text-terminal-green font-semibold">neofetch</span> - System specs &amp; ASCII profile</div>
               <div><span className="text-terminal-green font-semibold">ls</span> - List files in current directory</div>
+              <div><span className="text-terminal-green font-semibold">cat resume.pdf</span> - Launch or inspect resume</div>
               <div><span className="text-terminal-green font-semibold">ls projects/</span> - List all featured projects</div>
               <div><span className="text-terminal-green font-semibold">cat about.txt</span> - Print full biography</div>
               <div><span className="text-terminal-green font-semibold">cat skills.txt</span> - Print technical stack</div>
-              <div><span className="text-terminal-green font-semibold">pwd</span> - Print working directory</div>
+              <div><span className="text-terminal-green font-semibold">hackathon</span> - 1st Place AgriTech winner details</div>
+              <div><span className="text-terminal-green font-semibold">education</span> - Academic background log</div>
+              <div><span className="text-terminal-green font-semibold">certs</span> - Verified industry credentials</div>
+              <div><span className="text-terminal-green font-semibold">phone</span> - Direct reach-out coordinates</div>
               <div><span className="text-terminal-green font-semibold">cd [about|skills|projects|contact]</span> - Jump to section</div>
               <div><span className="text-terminal-green font-semibold">./art.sh</span> - Launch generative art playground</div>
               <div><span className="text-terminal-green font-semibold">sudo hire-me</span> - Initiate hiring protocol</div>
-              <div><span className="text-terminal-green font-semibold">date</span> - Print system timestamp</div>
-              <div><span className="text-terminal-green font-semibold">history</span> - View session command history</div>
               <div><span className="text-terminal-green font-semibold">clear</span> - Clear terminal scrollback</div>
             </div>
           </div>
@@ -198,6 +203,100 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
               <div key={group.category}>
                 <span className="text-terminal-cyan font-bold uppercase tracking-wider">{group.category}:</span>
                 <p className="text-slate-300 mt-0.5">{group.skills.join(', ')}</p>
+              </div>
+            ))}
+          </div>
+        );
+        break;
+
+      case 'cat resume.pdf':
+      case 'cat resume':
+      case 'resume':
+      case './resume':
+        outputNode = (
+          <div className="space-y-2 py-1 text-xs">
+            <div className="flex items-center justify-between border-b border-bg-tertiary pb-1.5">
+              <span className="text-terminal-green font-bold flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5 text-terminal-cyan" />
+                <span>NANDEESH NARAYAN KURUBAR — RESUME BRIEF</span>
+              </span>
+              <span className="text-terminal-cyan">[BCA 2026]</span>
+            </div>
+            <p className="text-slate-300 leading-relaxed">
+              Full-Stack Developer &amp; AI Engineer with hands-on experience building MERN applications and LLM-integrated products (StockBridge, Aria local-first agent, OCR pipeline, UPS Service).
+            </p>
+            <div className="text-slate-400 space-y-0.5">
+              <p><span className="text-terminal-cyan font-semibold">Coordinates:</span> {developerProfile.email} • {developerProfile.phoneFormatted} • Bengaluru</p>
+              <p><span className="text-terminal-cyan font-semibold">Target Roles:</span> {developerProfile.targetRoles.join(' • ')}</p>
+            </div>
+            {onOpenResume && (
+              <p className="text-terminal-green pt-1">
+                [ OK ] Launching zathura graphical document viewer modal...
+              </p>
+            )}
+          </div>
+        );
+        if (onOpenResume) {
+          setTimeout(() => onOpenResume(), 400);
+        }
+        break;
+
+      case 'phone':
+      case 'contact':
+      case 'whatsapp':
+        outputNode = (
+          <div className="space-y-1.5 py-1 text-xs">
+            <p className="text-terminal-cyan font-bold flex items-center gap-1.5">
+              <Phone className="w-3.5 h-3.5 text-terminal-green" />
+              <span>Direct Coordinates:</span>
+            </p>
+            <p className="text-slate-200">Phone: <span className="text-white font-bold">{developerProfile.phoneFormatted}</span></p>
+            <p className="text-slate-200">Email: <span className="text-white font-bold">{developerProfile.email}</span></p>
+            <p className="text-slate-200">WhatsApp: <a href={developerProfile.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-terminal-green underline">{developerProfile.phoneFormatted} (Open Chat)</a></p>
+            <p className="text-muted">Location: {developerProfile.location}</p>
+          </div>
+        );
+        break;
+
+      case 'hackathon':
+      case 'agritech':
+        outputNode = (
+          <div className="space-y-1.5 py-1 text-xs">
+            <p className="text-terminal-amber font-bold flex items-center gap-1.5">
+              <Award className="w-3.5 h-3.5" />
+              <span>1st Place Winner — Inter-College Hackathon (2024)</span>
+            </p>
+            <p className="text-slate-200 font-sans leading-relaxed">
+              Architected an AgriTech farming-assistance web platform with market price telemetry, automated crop disease identification, and farmer price advisories.
+            </p>
+            <p className="text-terminal-green">Result: Ranked #1 among all competing college developer teams.</p>
+          </div>
+        );
+        break;
+
+      case 'education':
+        outputNode = (
+          <div className="space-y-2 py-1 text-xs">
+            <p className="text-terminal-cyan font-bold">Academic Dossier:</p>
+            {educationData.map((edu, i) => (
+              <div key={i} className="border-l-2 border-terminal-cyan/40 pl-2.5 space-y-0.5">
+                <p className="text-white font-bold">{edu.degree} <span className="text-terminal-green text-[10px]">({edu.period})</span></p>
+                <p className="text-muted text-[11px]">{edu.institution}</p>
+              </div>
+            ))}
+          </div>
+        );
+        break;
+
+      case 'certs':
+      case 'certifications':
+        outputNode = (
+          <div className="space-y-1.5 py-1 text-xs">
+            <p className="text-terminal-purple font-bold">Verified Industry Certifications:</p>
+            {certificationsData.map((c, i) => (
+              <div key={i} className="flex items-center justify-between py-0.5 border-b border-bg-tertiary/40">
+                <span className="text-slate-200">{c.title} — <span className="text-muted">{c.issuer}</span></span>
+                <span className="text-terminal-green text-[10px] font-bold">[{c.status}]</span>
               </div>
             ))}
           </div>
