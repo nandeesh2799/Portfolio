@@ -1,17 +1,14 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import {
   ArrowRight,
   FileDown,
   Github,
   Linkedin,
   Terminal,
-  Code2,
-  LayoutGrid,
-  ChevronRight
+  LayoutGrid
 } from 'lucide-react';
 import { developerProfile } from '../data/portfolioData';
 import { TerminalComponent } from './TerminalComponent';
-import { CodeEditorWindow } from './CodeEditorWindow';
 
 interface HeroDesktopProps {
   onNavigateSection: (sectionId: string) => void;
@@ -20,16 +17,6 @@ interface HeroDesktopProps {
 
 export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
   ({ onNavigateSection, className = '' }, ref) => {
-  const [activeWindowTab, setActiveWindowTab] = useState<'terminal' | 'code'>('terminal');
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const isMobile = windowWidth < 1024;
 
   return (
     <section
@@ -57,11 +44,13 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
           {/* Left: Text & Bio & CTAs (7 cols) */}
           <div className="lg:col-span-7 space-y-5">
             {/* Status Chip */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg-secondary border border-bg-tertiary text-xs font-mono text-muted">
+            <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-bg-secondary border border-bg-tertiary text-xs font-mono text-muted">
               <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
-              <span className="text-slate-300">HYPRLAND WORKSPACE // LINUX POWERED</span>
+              <span className="text-slate-300">HYPRLAND WORKSPACE // LINUX</span>
               <span className="text-slate-600">•</span>
               <span className="text-terminal-cyan">BCA 2026</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-terminal-green font-semibold">Seeking: Software / AI Engineer</span>
             </div>
 
             {/* Heading */}
@@ -194,58 +183,24 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
         {/* Linux Desktop Window Manager Workstation Matrix */}
         <div className="space-y-3 pt-2">
           
-          {/* Workstation Window Bar (Hyprland layout switcher) */}
+          {/* Workstation Window Bar */}
           <div className="flex items-center justify-between gap-2 border-b border-bg-tertiary pb-2 font-mono text-xs">
             <div className="flex items-center gap-2 text-muted">
-              <LayoutGrid className="w-3.5 h-3.5 text-terminal-green" />
-              <span className="hidden sm:inline font-semibold text-slate-300">TILING WORKSTATION MATRIX</span>
+              <Terminal className="w-3.5 h-3.5 text-terminal-green" />
+              <span className="font-semibold text-slate-300">INTERACTIVE SHELL WORKSTATION</span>
               <span className="text-slate-600 hidden sm:inline">//</span>
-              <span className="text-[11px] text-muted hidden md:inline">Click tabs or type commands in terminal</span>
+              <span className="text-[11px] text-muted hidden sm:inline">foot / zsh 5.9</span>
             </div>
 
-            {/* Mobile / Desktop Window Switcher Tabs */}
-            <div className="flex items-center gap-1 bg-bg-secondary p-1 rounded-lg border border-bg-tertiary">
-              <button
-                onClick={() => setActiveWindowTab('terminal')}
-                className={`px-2.5 py-1 rounded text-[11px] flex items-center gap-1 transition-colors ${
-                  activeWindowTab === 'terminal' 
-                    ? 'bg-terminal-green/20 text-terminal-green border border-terminal-green/30 font-semibold' 
-                    : 'text-muted hover:text-slate-200'
-                }`}
-              >
-                <Terminal className="w-3 h-3" />
-                <span>terminal</span>
-              </button>
-
-              <button
-                onClick={() => setActiveWindowTab('code')}
-                className={`px-2.5 py-1 rounded text-[11px] flex items-center gap-1 transition-colors ${
-                  activeWindowTab === 'code' 
-                    ? 'bg-terminal-cyan/20 text-terminal-cyan border border-terminal-cyan/30 font-semibold' 
-                    : 'text-muted hover:text-slate-200'
-                }`}
-              >
-                <Code2 className="w-3 h-3" />
-                <span>code.ts</span>
-              </button>
+            <div className="flex items-center gap-2 text-[11px] font-mono text-muted">
+              <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
+              <span>Type <span className="text-terminal-cyan">help</span> or <span className="text-terminal-green">neofetch</span></span>
             </div>
           </div>
 
-          {/* Desktop Tiling Grid View - On mobile, show only active tab to save space */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-            {/* Primary Interactive Terminal Window (7 cols) */}
-            <div className="lg:col-span-7 flex flex-col min-h-[460px]">
-              {(activeWindowTab === 'terminal' || !isMobile) && (
-                <TerminalComponent onNavigateSection={onNavigateSection} />
-              )}
-            </div>
-
-            {/* Secondary Code Editor Window (5 cols) */}
-            <div className="lg:col-span-5 flex flex-col min-h-[460px]">
-              {(activeWindowTab === 'code' || !isMobile) && (
-                <CodeEditorWindow />
-              )}
-            </div>
+          {/* Primary Interactive Terminal Window (Full-Width) */}
+          <div className="w-full flex flex-col min-h-[460px]">
+            <TerminalComponent onNavigateSection={onNavigateSection} />
           </div>
 
         </div>

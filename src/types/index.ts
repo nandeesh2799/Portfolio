@@ -11,6 +11,8 @@ export interface Project {
   badge?: string;
   iconName: string;
   metrics?: { label: string; value: string };
+  architectureWorkflow?: { label: string; steps: string[] };
+  architectureHighlights?: string[];
 }
 
 export interface SkillGroup {
@@ -47,4 +49,6 @@ export interface AchievementItem {
   year: string;
   event: string;
   description: string;
+  spotlight?: boolean;
+  highlights?: string[];
 }

@@ -7,7 +7,10 @@ import {
   Languages,
   CheckCircle2,
   Calendar,
-  FileText
+  FileText,
+  Sparkles,
+  Download,
+  ExternalLink
 } from 'lucide-react';
 import {
   educationData,
@@ -29,24 +32,37 @@ export const DossierSection = forwardRef<HTMLElement, SectionProps>(
       className={`py-12 sm:py-16 relative border-t border-bg-tertiary ${className}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
-        <div className="mb-8 space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg-secondary border border-bg-tertiary text-xs font-mono text-terminal-green">
-            <Terminal className="w-3.5 h-3.5" />
-            <span>06 // AUDIT_LOG // EDUCATION_&amp;_CREDENTIALS</span>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bg-secondary border border-bg-tertiary text-xs font-mono text-terminal-green">
+              <Terminal className="w-3.5 h-3.5" />
+              <span>06 // AUDIT_LOG // EDUCATION_&amp;_CREDENTIALS</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-sans">
+              Education, Certifications &amp; Achievements
+            </h2>
+            <p className="text-muted text-sm sm:text-base font-mono">
+              System audit dossier: academic foundations, verified technical certifications, and competition honors.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-sans">
-            Education, Certifications &amp; Achievements
-          </h2>
-          <p className="text-muted text-sm sm:text-base font-mono">
-            System audit dossier: academic foundations, verified technical certifications, and competition honors.
-          </p>
+
+          <div className="flex items-center gap-2 font-mono text-xs">
+            <a
+              href="./resumes/Nandeesh_NK_Resume_AI.pdf"
+              download="Nandeesh_NK_Resume_AI.pdf"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-terminal-green/10 hover:bg-terminal-green/20 border border-terminal-green/30 text-terminal-green font-semibold transition-all shadow-sm"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Download PDF</span>
+            </a>
+          </div>
         </div>
 
         {/* Dossier Grid (3 Columns) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Column 1: Education (4 cols) */}
           <div className="lg:col-span-4 hypr-window rounded-2xl overflow-hidden flex flex-col font-mono text-xs">
             <div className="px-4 py-3 bg-bg-secondary border-b border-bg-tertiary flex items-center justify-between font-bold text-white">
@@ -82,7 +98,7 @@ export const DossierSection = forwardRef<HTMLElement, SectionProps>(
 
           {/* Column 2: Certifications & Spoken Languages (4 cols) */}
           <div className="lg:col-span-4 space-y-6">
-            
+
             {/* Certifications Window */}
             <div className="hypr-window rounded-2xl overflow-hidden font-mono text-xs">
               <div className="px-4 py-3 bg-bg-secondary border-b border-bg-tertiary flex items-center justify-between font-bold text-white">
@@ -117,6 +133,7 @@ export const DossierSection = forwardRef<HTMLElement, SectionProps>(
                   <Languages className="w-4 h-4" />
                   <span>SPOKEN_LANGUAGES.locale</span>
                 </span>
+                <span className="text-[10px] text-muted">3 LANGUAGES</span>
               </div>
 
               <div className="p-5 bg-bg-card/70 space-y-2.5">
@@ -131,35 +148,69 @@ export const DossierSection = forwardRef<HTMLElement, SectionProps>(
 
           </div>
 
-          {/* Column 3: Achievements & Honors (4 cols) */}
+          {/* Column 3: Achievements & Honors with AgriTech Hackathon Spotlight (4 cols) */}
           <div className="lg:col-span-4 hypr-window rounded-2xl overflow-hidden flex flex-col font-mono text-xs">
             <div className="px-4 py-3 bg-bg-secondary border-b border-bg-tertiary flex items-center justify-between font-bold text-white">
               <span className="flex items-center gap-2 text-terminal-amber">
                 <Award className="w-4 h-4" />
                 <span>HONORS_&amp;_AWARDS.dossier</span>
               </span>
-              <span className="text-[10px] text-terminal-amber">TOP_HONORS</span>
+              <span className="text-[10px] text-terminal-amber bg-terminal-amber/10 border border-terminal-amber/30 px-2 py-0.5 rounded-full">
+                COMPETITION &amp; LEADERSHIP
+              </span>
             </div>
 
-            <div className="p-5 space-y-4 bg-bg-card/70 overflow-y-auto">
-              {achievementsData.map((item, idx) => (
-                <div key={idx} className="p-3 rounded-xl bg-bg-secondary/70 border border-bg-tertiary space-y-1 hover:border-terminal-amber/40 transition-colors">
-                  <div className="flex items-center justify-between">
-                    <span className="text-terminal-amber font-bold text-[11px] font-sans">
-                      {item.title}
-                    </span>
-                    <span className="text-[10px] text-muted">
-                      {item.year}
-                    </span>
+            <div className="p-5 space-y-4 bg-bg-card/70">
+              {achievementsData.map((item, idx) => {
+                const isSpotlight = Boolean(item.spotlight);
+
+                return (
+                  <div
+                    key={idx}
+                    className={`p-3.5 rounded-xl border transition-all ${
+                      isSpotlight
+                        ? 'bg-terminal-amber/5 border-terminal-amber/40 shadow-glow-amber/10 relative overflow-hidden'
+                        : 'bg-bg-secondary/70 border-bg-tertiary hover:border-terminal-amber/30'
+                    }`}
+                  >
+                    {isSpotlight && (
+                      <div className="absolute top-0 right-0 px-2.5 py-0.5 rounded-bl-lg bg-terminal-amber text-black font-extrabold text-[9px] uppercase tracking-wider flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5" />
+                        <span>Winner</span>
+                      </div>
+                    )}
+
+                    <div className="flex items-start justify-between gap-2 pr-14">
+                      <div>
+                        <h4 className="text-terminal-amber font-bold text-xs font-sans">
+                          {item.title}
+                        </h4>
+                        <p className="text-[11px] text-terminal-cyan font-mono">
+                          {item.event}
+                        </p>
+                      </div>
+                      <span className="text-[10px] text-muted shrink-0">
+                        {item.year}
+                      </span>
+                    </div>
+
+                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed pt-1.5">
+                      {item.description}
+                    </p>
+
+                    {item.highlights && item.highlights.length > 0 && (
+                      <ul className="pt-2 space-y-1 text-[10px] text-slate-400 font-mono">
+                        {item.highlights.map((h, hIdx) => (
+                          <li key={hIdx} className="flex items-start gap-1.5">
+                            <span className="text-terminal-amber font-bold">›</span>
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  <p className="text-[11px] text-terminal-cyan">
-                    {item.event}
-                  </p>
-                  <p className="text-[11px] text-slate-300 font-sans leading-relaxed pt-0.5">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
