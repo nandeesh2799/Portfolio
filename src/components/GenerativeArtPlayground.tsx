@@ -31,7 +31,7 @@ const artworks: Artwork[] = [
   {
     id: 'shiva-parvati',
     src: '/images/artworks/shiva-parvati.jpg',
-    title: 'Shiva & Parvati',
+    title: 'Shiva Parvati',
     category: 'Paintings',
     medium: 'Acrylic on Canvas',
     description: 'Stylized contemporary acrylic composition depicting Lord Shiva and Goddess Parvati in divine harmony.',
@@ -39,7 +39,7 @@ const artworks: Artwork[] = [
   {
     id: 'yellamma-devi',
     src: '/images/artworks/yellamma-devi.jpg',
-    title: 'Yellamma Devi',
+    title: 'Yellamma Diety',
     category: 'Paintings',
     medium: 'Acrylic on Canvas',
     description: 'A richly detailed devotional painting of Goddess Renuka Yellamma, adorned with traditional ornaments and radiant crown halo.',
@@ -47,7 +47,7 @@ const artworks: Artwork[] = [
   {
     id: 'raghavendra-swamy',
     src: '/images/artworks/raghavendra-swamy.jpg',
-    title: 'Guru Raghavendra Swamy',
+    title: 'Raghvendra Swamy',
     category: 'Paintings',
     medium: 'Acrylic on Canvas',
     description: 'A serene portrait of Saint Sri Raghavendra Swamy of Mantralayam seated in contemplation, holding sacred idol and staff.',
@@ -63,7 +63,7 @@ const artworks: Artwork[] = [
   {
     id: 'nagavalli',
     src: '/images/artworks/nagavalli.jpg',
-    title: 'Nagavalli — Classical Dancer',
+    title: 'Nagavalli',
     category: 'Paintings',
     medium: 'Acrylic on Black Canvas',
     description: 'Expressive classical dancer in striking costume and mudra pose against an intense black backdrop.',
@@ -71,9 +71,9 @@ const artworks: Artwork[] = [
   {
     id: 'shiva-cosmic-blue',
     src: '/images/artworks/shiva-cosmic-blue.jpg',
-    title: 'Shiva — Cosmic Meditation',
+    title: 'Shiva Cosmic Meditation',
     category: 'Paintings',
-    medium: 'Watercolour on Paper',
+    medium: 'WaterColor on Paper',
     description: 'Lord Shiva in deep cosmic meditation, painted with galaxy-blue watercolour washes, celestial starfields, and crescent moon.',
   },
 
@@ -81,9 +81,9 @@ const artworks: Artwork[] = [
   {
     id: 'agni-shiva-fabric',
     src: '/images/artworks/agni-shiva-fabric.jpg',
-    title: 'Agni Shiva — Fabric Painting',
+    title: 'Agni Shiva Fabric Painting',
     category: 'Fabric Art',
-    medium: 'Fabric Paint on T-Shirt',
+    medium: 'Fabric Painting on T-Shirt',
     description: 'Lord Shiva wielding the trishul, surrounded by roaring fire — hand-painted with fabric pigments directly onto a white t-shirt.',
   },
 
@@ -91,9 +91,9 @@ const artworks: Artwork[] = [
   {
     id: 'shiva-kali-tattoo',
     src: '/images/artworks/shiva-kali-tattoo.jpg',
-    title: 'Shiva & Kali — Tattoo Art',
+    title: 'Shiva and Kali Tattoo',
     category: 'Tattoo Art',
-    medium: 'Tattoo Ink on Synthetic Fake Skin',
+    medium: 'Tattoo Ink on Fake Skin',
     description: 'Detailed tattoo needlework depicting serene Shiva and fierce Kali, practiced with precision needle shading on fake skin.',
   },
 
@@ -101,7 +101,7 @@ const artworks: Artwork[] = [
   {
     id: 'krishna-watercolour',
     src: '/images/artworks/krishna-watercolour.jpg',
-    title: 'Krishna — Watercolour',
+    title: 'Krishna Watercolour Painting',
     category: 'Sketches',
     medium: 'Watercolour & Ink on Sketchbook',
     description: 'Young Krishna adorned with peacock feathers and gold jewellery, rendered in delicate watercolour washes with clean ink outlines.',
@@ -109,10 +109,10 @@ const artworks: Artwork[] = [
   {
     id: 'portrait-watercolour',
     src: '/images/artworks/portrait-watercolour.jpg',
-    title: 'Portrait Study',
+    title: 'Portrait Watercolour Painting',
     category: 'Sketches',
-    medium: 'Watercolour / Ink on Paper',
-    description: 'Expressive monochromatic portrait capturing a joyful smile with subtle shading and fine hair detailing.',
+    medium: 'Watercolour on Paper',
+    description: 'Expressive portrait capturing a joyful smile with subtle shading and fine hair detailing.',
   },
   {
     id: 'aghor-shiva-pen',
@@ -127,9 +127,9 @@ const artworks: Artwork[] = [
   {
     id: 'hanuman-wall-mural',
     src: '/images/artworks/hanuman-wall-mural.jpg',
-    title: 'Hanuman Wall Painting & Flag',
+    title: 'Hanuman Wall Painting with Rama/Hanuman Flag',
     category: 'Wall Art',
-    medium: 'Wall Mural & Acrylic on Fabric',
+    medium: 'Wall Painting & Flag Painting',
     description: 'A bold monochrome Hanuman mural painted directly on a wall, accompanied by a hand-painted Rama-Hanuman flag with Kannada script.',
   },
 ];
