@@ -162,8 +162,6 @@ export const ContactSection = forwardRef<HTMLElement, SectionProps>(
       return;
     }
 
-    setIsSubmitting(true);
-
     const providerInfo = getMailProviderInfo(
       developerProfile.email,
       formData.email,
@@ -178,22 +176,26 @@ export const ContactSection = forwardRef<HTMLElement, SectionProps>(
       isWebmail: providerInfo.isWebmail
     });
 
+    setIsSubmitting(true);
+    setSubmitStatus('success');
+
+    // Open immediately in a NEW tab directly within the user click gesture.
+    // Calling window.open synchronously here guarantees modern browsers treat it as a trusted user action.
+    const newTab = window.open(providerInfo.composeUrl, '_blank', 'noopener,noreferrer');
+    if (!newTab) {
+      // Fallback anchor click with target="_blank" if window.open was restricted
+      const anchor = document.createElement('a');
+      anchor.href = providerInfo.composeUrl;
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+    }
+
     setTimeout(() => {
       setIsSubmitting(false);
-      setSubmitStatus('success');
-
-      if (providerInfo.isWebmail) {
-        // Attempt to open in a new tab for seamless webmail UX
-        const win = window.open(providerInfo.composeUrl, '_blank', 'noopener,noreferrer');
-        if (!win || win.closed || typeof win.closed === 'undefined') {
-          // If popup is blocked by the browser, fallback to standard navigation
-          window.location.href = providerInfo.composeUrl;
-        }
-      } else {
-        // Native OS / Mobile mailto client
-        window.location.href = providerInfo.composeUrl;
-      }
-    }, 400);
+    }, 500);
   };
 
   return (
@@ -448,12 +450,12 @@ export const ContactSection = forwardRef<HTMLElement, SectionProps>(
                   <div className="pt-1 flex items-center gap-2">
                     <a
                       href={routedInfo.url}
-                      target={routedInfo.isWebmail ? "_blank" : "_self"}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-terminal-green text-[#080B10] font-bold hover:shadow-glow-green transition-all"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      <span>Open {routedInfo.providerName} Draft</span>
+                      <span>Open {routedInfo.providerName} in New Tab</span>
                     </a>
                   </div>
                 </div>
