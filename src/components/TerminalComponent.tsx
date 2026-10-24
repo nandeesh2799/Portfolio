@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal as TerminalIcon, Maximize2, Minimize2, X, RefreshCw, CornerDownLeft, FileText, Phone, Award } from 'lucide-react';
+import { Terminal as TerminalIcon, Maximize2, Minimize2, X, RefreshCw, CornerDownLeft, FileText, Phone, Award, Palette, Image as ImageIcon } from 'lucide-react';
 import { developerProfile, projectsData, skillGroups, educationData, certificationsData, achievementsData } from '../data/portfolioData';
+import { artworksData } from '../data/artworksData';
 
 interface TerminalComponentProps {
   onNavigateSection?: (sectionId: string) => void;
@@ -31,10 +32,10 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
   const isInitialLoadRef = useRef(true);
 
   const availableCommands = [
-    'help', 'whoami', 'neofetch', 'ls', 'ls projects/', 'cat about.txt',
+    'help', 'whoami', 'neofetch', 'ls', 'ls projects/', 'ls art/', 'cat about.txt',
     'cat skills.txt', 'cat resume.pdf', 'resume', 'phone', 'hackathon',
     'education', 'certs', 'pwd', 'cd projects', 'cd skills', 'cd about',
-    'cd contact', './art.sh', 'sudo hire-me', 'clear', 'date', 'history'
+    'cd art', 'cd contact', 'art', 'gallery', 'feh', './art.sh', 'sudo hire-me', 'clear', 'date', 'history'
   ];
 
   // Initial welcome message
@@ -87,6 +88,156 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
 
     let outputNode: React.ReactNode = null;
 
+    // feh image viewer CLI command
+    if (mainCmd === 'feh' || mainCmd === 'view') {
+      const query = arg.toLowerCase().replace(/^~\/art\//, '').replace(/^art\//, '').replace(/\.jpg$/, '');
+      const found = query
+        ? artworksData.find(
+            (a) =>
+              a.id.toLowerCase().includes(query) ||
+              a.title.toLowerCase().includes(query) ||
+              a.category.toLowerCase().includes(query)
+          )
+        : artworksData[4]; // Default to Nagavalli if no query provided
+
+      if (found) {
+        outputNode = (
+          <div className="p-3 bg-bg-secondary/95 border border-bg-tertiary rounded-xl space-y-2.5 max-w-lg font-mono">
+            <div className="flex items-center justify-between text-muted text-[11px] border-b border-bg-tertiary pb-1.5">
+              <span className="text-terminal-green font-bold flex items-center gap-1.5">
+                <ImageIcon className="w-3.5 h-3.5 text-terminal-cyan" />
+                <span>feh v3.10.2: ~/art/{found.id}.jpg</span>
+              </span>
+              <span className="text-terminal-purple text-[10px] font-mono">[{found.category}]</span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 items-center">
+              <img
+                src={found.src}
+                alt={found.title}
+                className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg border border-white/10 shadow-md shrink-0 cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => {
+                  if (onNavigateSection) onNavigateSection('art');
+                  window.dispatchEvent(new CustomEvent('open-artwork', { detail: { artworkId: found.id } }));
+                }}
+              />
+              <div className="space-y-1 text-xs min-w-0">
+                <p className="text-white font-bold text-sm truncate">{found.title}</p>
+                <p className="text-terminal-cyan text-[11px]">{found.medium}</p>
+                <p className="text-slate-300 text-[11px] leading-relaxed line-clamp-2">{found.description}</p>
+
+                {/* Dominant Palette */}
+                {found.palette && (
+                  <div className="flex items-center gap-1.5 pt-1">
+                    <span className="text-[10px] text-muted">Palette:</span>
+                    <div className="flex items-center gap-1">
+                      {found.palette.map((c, i) => (
+                        <span
+                          key={i}
+                          className="w-3 h-3 rounded-full border border-black/50"
+                          style={{ backgroundColor: c }}
+                          title={c}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-bg-tertiary flex items-center justify-between text-[11px]">
+              <button
+                type="button"
+                onClick={() => {
+                  if (onNavigateSection) onNavigateSection('art');
+                  window.dispatchEvent(new CustomEvent('open-artwork', { detail: { artworkId: found.id } }));
+                }}
+                className="px-2.5 py-1 rounded bg-terminal-purple/20 hover:bg-terminal-purple/30 text-terminal-purple border border-terminal-purple/40 font-semibold flex items-center gap-1.5 transition-all"
+              >
+                <Maximize2 className="w-3 h-3" />
+                <span>Launch in Studio Lightbox</span>
+              </button>
+              <span className="text-[10px] text-muted font-mono">{found.id}.jpg</span>
+            </div>
+          </div>
+        );
+      } else {
+        outputNode = (
+          <div className="text-terminal-amber text-xs space-y-1">
+            <p>feh: cannot open '{arg}': No such artwork in ~/art/</p>
+            <p className="text-muted">Type <span className="text-terminal-green font-bold">art</span> or <span className="text-terminal-green font-bold">ls art/</span> to view all available pieces.</p>
+          </div>
+        );
+      }
+
+      setEntries((prev) => [...prev, { command: rawCmd, output: outputNode }]);
+      setInputVal('');
+      return;
+    }
+
+    // art or gallery command with optional category filter
+    if (mainCmd === 'art' || mainCmd === 'gallery') {
+      const filter = arg.toLowerCase();
+      const list = filter
+        ? artworksData.filter(
+            (a) =>
+              a.category.toLowerCase().includes(filter) ||
+              a.title.toLowerCase().includes(filter) ||
+              a.medium.toLowerCase().includes(filter)
+          )
+        : artworksData;
+
+      outputNode = (
+        <div className="space-y-2 py-1 text-xs font-mono">
+          <div className="flex items-center justify-between border-b border-bg-tertiary pb-1.5 text-terminal-purple font-bold">
+            <span className="flex items-center gap-1.5">
+              <Palette className="w-3.5 h-3.5 text-terminal-cyan" />
+              <span>NANDEESH CREATIVE ART STUDIO // {list.length} {filter ? `(${filter.toUpperCase()})` : 'TOTAL'} WORKS</span>
+            </span>
+            <span className="text-muted text-[10px]">feh [id] to preview</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-56 overflow-y-auto pr-1">
+            {list.map((art) => (
+              <div
+                key={art.id}
+                onClick={() => {
+                  if (onNavigateSection) onNavigateSection('art');
+                  window.dispatchEvent(new CustomEvent('open-artwork', { detail: { artworkId: art.id } }));
+                }}
+                className="p-2 rounded bg-bg-secondary hover:bg-bg-tertiary border border-bg-tertiary hover:border-terminal-purple/40 cursor-pointer transition-all flex items-center justify-between group"
+              >
+                <div className="min-w-0 pr-2">
+                  <p className="text-white font-semibold truncate group-hover:text-terminal-cyan transition-colors">
+                    {art.title}
+                  </p>
+                  <p className="text-muted text-[10px] truncate">{art.medium} • <span className="text-terminal-purple">{art.category}</span></p>
+                </div>
+                <span className="text-[10px] text-terminal-green font-mono shrink-0">feh &rarr;</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pt-1 border-t border-bg-tertiary text-[10px] text-muted">
+            <span>💡 Quick test: <strong className="text-terminal-green font-mono">feh nagavalli</strong> or <strong className="text-terminal-green font-mono">feh shiva</strong></span>
+            <button
+              type="button"
+              onClick={() => {
+                if (onNavigateSection) onNavigateSection('art');
+              }}
+              className="text-terminal-purple hover:underline text-left"
+            >
+              Jump to Art Studio Section &rarr;
+            </button>
+          </div>
+        </div>
+      );
+
+      setEntries((prev) => [...prev, { command: rawCmd, output: outputNode }]);
+      setInputVal('');
+      return;
+    }
+
     switch (cmd.toLowerCase()) {
       case 'clear':
         setEntries([]);
@@ -103,14 +254,15 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
               <div><span className="text-terminal-green font-semibold">ls</span> - List files in current directory</div>
               <div><span className="text-terminal-green font-semibold">cat resume.pdf</span> - Launch or inspect resume</div>
               <div><span className="text-terminal-green font-semibold">ls projects/</span> - List all featured projects</div>
+              <div><span className="text-terminal-green font-semibold">art / gallery</span> - Browse artwork &amp; physical media</div>
+              <div><span className="text-terminal-green font-semibold">feh [name]</span> - Linux image viewer (e.g. feh nagavalli)</div>
               <div><span className="text-terminal-green font-semibold">cat about.txt</span> - Print full biography</div>
               <div><span className="text-terminal-green font-semibold">cat skills.txt</span> - Print technical stack</div>
               <div><span className="text-terminal-green font-semibold">hackathon</span> - 1st Place AgriTech winner details</div>
               <div><span className="text-terminal-green font-semibold">education</span> - Academic background log</div>
               <div><span className="text-terminal-green font-semibold">certs</span> - Verified industry credentials</div>
               <div><span className="text-terminal-green font-semibold">phone</span> - Direct reach-out coordinates</div>
-              <div><span className="text-terminal-green font-semibold">cd [about|skills|projects|contact]</span> - Jump to section</div>
-              <div><span className="text-terminal-green font-semibold">./art.sh</span> - Launch generative art playground</div>
+              <div><span className="text-terminal-green font-semibold">cd [about|skills|projects|art|contact]</span> - Jump to section</div>
               <div><span className="text-terminal-green font-semibold">sudo hire-me</span> - Initiate hiring protocol</div>
               <div><span className="text-terminal-green font-semibold">clear</span> - Clear terminal scrollback</div>
             </div>
@@ -175,6 +327,7 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
         outputNode = (
           <div className="flex flex-wrap gap-4 text-xs">
             <span className="text-terminal-cyan font-bold">projects/</span>
+            <span className="text-terminal-purple font-bold">art/</span>
             <span className="text-slate-300">about.txt</span>
             <span className="text-slate-300">skills.txt</span>
             <span className="text-terminal-green font-bold">art.sh*</span>
@@ -195,6 +348,26 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
                 <span className="text-[10px] text-muted font-mono">[{p.category}]</span>
               </div>
             ))}
+          </div>
+        );
+        break;
+
+      case 'ls art/':
+      case 'ls art':
+        outputNode = (
+          <div className="space-y-1.5 py-1 text-xs">
+            <p className="text-muted">total {artworksData.length} artwork image files</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 py-1">
+              {artworksData.map((a) => (
+                <div key={a.id} className="flex items-center gap-2">
+                  <span className="text-terminal-purple font-semibold">{a.id}.jpg</span>
+                  <span className="text-[10px] text-muted font-mono">[{a.category}]</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-terminal-green text-[10px] pt-1">
+              Use <span className="font-bold">feh [name]</span> to preview any artwork.
+            </p>
           </div>
         );
         break;
@@ -343,6 +516,12 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
       case 'cd /contact':
         outputNode = <p className="text-terminal-cyan">Navigating to /contact workspace...</p>;
         if (onNavigateSection) onNavigateSection('contact');
+        break;
+
+      case 'cd art':
+      case 'cd /art':
+        outputNode = <p className="text-terminal-purple">Navigating to /art studio workspace...</p>;
+        if (onNavigateSection) onNavigateSection('art');
         break;
 
       case 'cd':

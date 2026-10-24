@@ -53,3 +53,14 @@ export interface AchievementItem {
   badge?: string;
   highlights?: string[];
 }
+
+export interface Artwork {
+  id: string;
+  src: string;
+  title: string;
+  category: 'Paintings' | 'Fabric Art' | 'Tattoo Art' | 'Sketches' | 'Wall Art' | string;
+  medium: string;
+  description: string;
+  palette: string[];
+}
+
