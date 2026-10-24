@@ -27,6 +27,8 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
   const [isMaximized, setIsMaximized] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isInitialLoadRef = useRef(true);
 
   const availableCommands = [
     'help', 'whoami', 'neofetch', 'ls', 'ls projects/', 'cat about.txt',
@@ -48,11 +50,23 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
         )
       }
     ]);
+
+    // Mark initial load as complete after a brief delay to allow layout to stabilize
+    setTimeout(() => {
+      isInitialLoadRef.current = false;
+    }, 100);
   }, []);
 
-  // Scroll to bottom on new entry
+  // Scroll to bottom on new entry (skip initial load)
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Skip scrolling on initial load to prevent page scroll
+    if (isInitialLoadRef.current) return;
+
+    // Use direct scrollTop on the scroll container for more reliable internal scrolling
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [entries]);
 
   const handleFocus = () => {
@@ -477,7 +491,7 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
       </div>
 
       {/* Terminal Scrollback Body */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-[#080B10]/95 terminal-select">
+      <div ref={scrollContainerRef} className="flex-1 p-4 overflow-y-auto space-y-3 bg-[#080B10]/95 terminal-select">
         {entries.map((entry, index) => (
           <div key={index} className="space-y-1">
             <div className="flex items-center gap-2 text-terminal-cyan font-bold">
