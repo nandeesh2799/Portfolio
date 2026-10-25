@@ -53,10 +53,17 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
     ]);
 
     // Mark initial load as complete after a brief delay to allow layout to stabilize
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       isInitialLoadRef.current = false;
+      // Only auto-focus if standalone (e.g. explicitly opened in floating modal) and on non-touch desktop
+      const isTouch = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+      if (isStandalone && !isTouch) {
+        inputRef.current?.focus({ preventScroll: true });
+      }
     }, 100);
-  }, []);
+
+    return () => clearTimeout(timer);
+  }, [isStandalone]);
 
   // Scroll to bottom on new entry (skip initial load)
   useEffect(() => {
@@ -694,7 +701,6 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
             onKeyDown={handleKeyDown}
             className="flex-1 bg-transparent border-none text-slate-100 focus:outline-none font-mono text-xs placeholder:text-muted/40"
             placeholder="Type 'help', 'neofetch', or 'cat about.txt'..."
-            autoFocus
             spellCheck={false}
             autoComplete="off"
             aria-label="Terminal command prompt"

@@ -162,14 +162,17 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
 
           {/* Right: Neon Terminal Portfolio Hero Showcase (5 cols) */}
           <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-            <div className="relative group w-full max-w-[450px] rounded-3xl overflow-hidden p-1.5 bg-gradient-to-br from-terminal-green/30 via-terminal-cyan/20 to-terminal-purple/30 shadow-[0_0_50px_rgba(0,245,255,0.2)] hover:shadow-[0_0_75px_rgba(57,255,136,0.3)] transition-all duration-500">
-              
-              {/* Card Container */}
-              <div className="relative rounded-[22px] overflow-hidden bg-[#0A0E17]">
+            <div className="relative group w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[450px] rounded-3xl overflow-hidden p-1.5 bg-gradient-to-br from-terminal-green/30 via-terminal-cyan/20 to-terminal-purple/30 shadow-[0_0_50px_rgba(0,245,255,0.2)] hover:shadow-[0_0_75px_rgba(57,255,136,0.3)] transition-all duration-500">
+
+              {/* Card Container with fixed aspect ratio to eliminate layout shift */}
+              <div className="relative rounded-[22px] overflow-hidden bg-[#0A0E17] aspect-[718/890]">
                 <img
                   src="/images/Neon Terminal Portfolio Hero.png"
                   alt="Nandeesh Narayan Kurubar — Neon Terminal Portfolio Hero"
-                  className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700 block"
+                  width={718}
+                  height={890}
+                  loading="eager"
+                  className="w-full h-full object-cover transform group-hover:scale-[1.02] transition-transform duration-700 block"
                 />
 
                 {/* Subtle bottom shadow vignette */}
@@ -183,7 +186,7 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
 
         {/* Linux Desktop Window Manager Workstation Matrix */}
         <div className="space-y-3 pt-2">
-          
+
           {/* Workstation Window Bar */}
           <div className="flex items-center justify-between gap-2 border-b border-bg-tertiary pb-2 font-mono text-xs">
             <div className="flex items-center gap-2 text-muted">
@@ -200,7 +203,7 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
           </div>
 
           {/* Primary Interactive Terminal Window (Full-Width) */}
-          <div className="w-full flex flex-col min-h-[460px]">
+          <div className="w-full flex flex-col min-h-[360px] sm:min-h-[460px]">
             <TerminalComponent
               onNavigateSection={onNavigateSection}
               onOpenResume={onOpenResume}

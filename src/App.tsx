@@ -30,6 +30,11 @@ export const App: React.FC = () => {
   const dossierReveal = useScrollReveal({ delay: 700 });
   const contactReveal = useScrollReveal({ delay: 800 });
 
+  // Ensure page starts at the very top on initial load / refresh
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   // Section observer to update active workspace pill in Waybar
   useEffect(() => {
     const sectionIds = ['hero', 'about', 'skills', 'projects', 'art', 'dossier', 'contact'];
@@ -55,9 +60,15 @@ export const App: React.FC = () => {
   const handleBootComplete = () => {
     sessionStorage.setItem('nandeeshos_booted', 'true');
     setBootCompleted(true);
+    // Guarantee viewport stays at the top after boot loader finishes
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
 
   const navigateToSection = (sectionId: string) => {
+    if (sectionId === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const el = document.getElementById(sectionId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
