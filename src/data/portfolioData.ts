@@ -56,6 +56,33 @@ export const projectsData: Project[] = [
     metrics: { label: 'REST APIs', value: '15+ Endpoints' }
   },
   {
+    id: 'chargeback-copilot',
+    title: 'Chargeback & Dispute Copilot',
+    category: 'AI Payment Dispute & Evidence Platform',
+    badge: 'FastAPI + ML Win-Score',
+    iconName: 'ShieldAlert',
+    tech: ['Python', 'FastAPI', 'Scikit-learn', 'AI Agent', 'Razorpay', 'ReportLab PDF', 'Tailwind'],
+    description: 'An AI-powered payment dispute investigation and evidence intelligence platform for online merchants contesting cardholder chargebacks and UPI payment disputes.',
+    keyFeatures: [
+      '10-step auditable AI investigation agent with evidence checklists and contradiction detection',
+      'Explainable ML win-probability model (scikit-learn Logistic Regression) with feature contribution breakdown',
+      'Dispute queue operations with deadline countdown monitoring and urgency ranking',
+      'Two-stage response studio generating Razorpay contest summaries (<=1000 chars) and formal dispute letters',
+      'ReportLab publication-grade PDF evidence dossier export with tamper-evident audit provenance'
+    ],
+    architectureWorkflow: {
+      label: '10-Step Investigation & ML Pipeline',
+      steps: ['Dispute Ingestion', 'Evidence Aggregation', 'Auditable Agent Analysis', 'ML Win-Probability Scoring', 'PDF Rebuttal Generation']
+    },
+    architectureHighlights: [
+      'Calibrated win-probability scoring (0–100%) with human-interpretable feature contribution',
+      '10-step deterministic agent strictly grounded in database entity IDs',
+      'Multi-gateway dispute representation letter generation'
+    ],
+    repoUrl: 'https://github.com/nandeesh2799/Chargeback-Dispute-Copilot',
+    metrics: { label: 'Scoring Engine', value: 'Calibrated ML' }
+  },
+  {
     id: 'aria',
     title: 'Aria',
     category: 'Local-First Desktop AI Companion & Automation Agent',

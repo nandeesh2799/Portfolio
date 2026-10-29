@@ -347,7 +347,7 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
       case 'ls projects':
         outputNode = (
           <div className="space-y-1.5 py-1 text-xs">
-            <p className="text-muted">total 4 directory nodes</p>
+            <p className="text-muted">total {projectsData.length} directory nodes</p>
             {projectsData.map((p) => (
               <div key={p.id} className="flex items-center gap-3">
                 <span className="text-terminal-cyan font-bold w-32">{p.id}/</span>

@@ -30,6 +30,7 @@ export const ProjectsSection = forwardRef<HTMLElement, SectionProps>(
   const getProjectIcon = (name: string) => {
     switch (name) {
       case 'ShoppingCart': return <ShoppingCart className="w-5 h-5 text-terminal-green" />;
+      case 'ShieldAlert': return <ShieldAlert className="w-5 h-5 text-terminal-cyan" />;
       case 'Bot': return <Bot className="w-5 h-5 text-terminal-cyan" />;
       case 'FileSpreadsheet': return <FileSpreadsheet className="w-5 h-5 text-terminal-purple" />;
       case 'Smartphone': return <Smartphone className="w-5 h-5 text-terminal-pink" />;
