@@ -382,7 +382,7 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
       case 'cat about.txt':
         outputNode = (
           <div className="text-slate-300 space-y-2 py-1 text-xs leading-relaxed max-w-2xl">
-            <p className="text-terminal-cyan font-semibold">=== ABOUT NANDESH NARAYAN KURUBAR ===</p>
+            <p className="text-terminal-cyan font-semibold">=== ABOUT NANDESH NARAYAN KURBAR ===</p>
             <p>{developerProfile.aboutBio}</p>
             <p className="text-muted">Education: {developerProfile.education}</p>
             <p className="text-terminal-green">Location: {developerProfile.location}</p>
@@ -412,7 +412,7 @@ export const TerminalComponent: React.FC<TerminalComponentProps> = ({
             <div className="flex items-center justify-between border-b border-bg-tertiary pb-1.5">
               <span className="text-terminal-green font-bold flex items-center gap-1.5">
                 <FileText className="w-3.5 h-3.5 text-terminal-cyan" />
-                <span>NANDEESH NARAYAN KURUBAR — RESUME BRIEF</span>
+                <span>NANDEESH NARAYAN KURBAR — RESUME BRIEF</span>
               </span>
               <span className="text-terminal-cyan">[BCA 2026]</span>
             </div>

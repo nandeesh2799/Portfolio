@@ -1,7 +1,7 @@
 import { Project, SkillGroup, EducationItem, CertificationItem, AchievementItem } from '../types';
 
 export const developerProfile = {
-  name: 'Nandeesh Narayan Kurubar',
+  name: 'Nandeesh Narayan Kurbar',
   role: 'Full-Stack Developer & AI Engineer',
   tagline: 'A Linux-powered creative developer workspace — where code becomes art and ideas become real products.',
   heroBio: "I build web and mobile applications, integrate AI/LLMs, and turn ideas into real products. I love coding, solving problems, exploring Linux (maintaining a customized triple-boot setup with Zorin OS, Kali Linux, and Windows), and creating things that combine technology with imagination.",

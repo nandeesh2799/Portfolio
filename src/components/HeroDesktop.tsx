@@ -168,7 +168,7 @@ export const HeroDesktop = forwardRef<HTMLElement, HeroDesktopProps>(
               <div className="relative rounded-[22px] overflow-hidden bg-[#0A0E17] aspect-[718/890]">
                 <img
                   src="/images/Neon Terminal Portfolio Hero.png"
-                  alt="Nandeesh Narayan Kurubar — Neon Terminal Portfolio Hero"
+                  alt="Nandeesh Narayan Kurbar — Neon Terminal Portfolio Hero"
                   width={718}
                   height={890}
                   loading="eager"

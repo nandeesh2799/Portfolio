@@ -11,7 +11,7 @@ export const BootSequence: React.FC<BootSequenceProps> = ({ onComplete }) => {
 
   const bootMessages = [
     'GRUB 2.06: Multi-boot loader initialized [Zorin OS | Kali Linux | Windows]...',
-    'Loading developer profile: Nandeesh Narayan Kurubar...',
+    'Loading developer profile: Nandeesh Narayan Kurbar...',
     'Mounting /projects [StockBridge, Aria, OCR, UPS]...',
     'Starting AI modules & LLM orchestration layers...',
     'Initializing creative digital art gallery...',

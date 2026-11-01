@@ -2,7 +2,7 @@
 
 > **"A Linux-powered creative developer's workspace — where code becomes art and ideas become real products."**
 
-A complete, high-performance personal portfolio website for **Nandeesh Narayan Kurubar**, Full-Stack Developer & AI Engineer. Designed as an immersive digital workstation combining **Arch Linux / Hyprland tiling window aesthetics**, **cyberpunk terminal styling**, and a **generative digital art studio**.
+A complete, high-performance personal portfolio website for **Nandeesh Narayan Kurbar**, Full-Stack Developer & AI Engineer. Designed as an immersive digital workstation combining **Arch Linux / Hyprland tiling window aesthetics**, **cyberpunk terminal styling**, and a **generative digital art studio**.
 
 ---
 

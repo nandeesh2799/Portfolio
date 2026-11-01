@@ -300,7 +300,7 @@ const Lightbox: React.FC<LightboxProps> = ({
               </div>
               <div>
                 <span className="text-terminal-cyan font-semibold">Artist:</span>{' '}
-                <span className="text-slate-200">Nandeesh Narayan Kurubar</span>
+                <span className="text-slate-200">Nandeesh Narayan Kurbar</span>
               </div>
             </div>
 
