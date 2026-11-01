@@ -7,7 +7,7 @@ export const developerProfile = {
   heroBio: "I build web and mobile applications, integrate AI/LLMs, and turn ideas into real products. I love coding, solving problems, exploring Linux (maintaining a customized triple-boot setup with Zorin OS, Kali Linux, and Windows), and creating things that combine technology with imagination.",
   aboutBio: "I'm a BCA graduate (2026) with hands-on experience in MERN-stack development and LLM-integrated products. I've built a SaaS-style POS and inventory platform with an AI business assistant, and a local-first, multi-model desktop AI agent. As a dedicated Linux enthusiast, I run and maintain a triple-boot workstation with Zorin OS and Kali Linux, exploring system architecture, security workflows, and creative computing.",
   location: 'Bengaluru, Karnataka, India',
-  education: 'BCA, 2026 (Christ Academy Institute for Advanced Studies)',
+  education: 'MCA, 2026–2028 (DSU) · BCA, 2026 (Christ Academy)',
   email: 'nandeeshnk506@gmail.com',
   phone: '+91 78927 26438',
   phoneFormatted: '+91 78927 26438',
@@ -216,16 +216,22 @@ export const skillGroups: SkillGroup[] = [
 
 export const educationData: EducationItem[] = [
   {
+    degree: 'Master of Computer Applications (MCA)',
+    institution: 'Dayananda Sagar University (Online), Bengaluru',
+    period: '2026 – 2028 (Expected)',
+    details: 'Advanced computer applications, distributed systems, cloud computing, and AI engineering methodologies.'
+  },
+  {
     degree: 'Bachelor of Computer Applications (BCA)',
     institution: 'Christ Academy Institute for Advanced Studies, Bengaluru',
-    period: '2023 – July 2026',
+    period: '2023 – Jul 2026',
     details: 'Focus on full-stack software development, database systems, AI engineering, and computer networking.'
   },
   {
-    degree: 'Pre-University (Commerce / Computer Science)',
+    degree: 'Pre-University (Science / Computer Science)',
     institution: 'Krupanidhi PU College, Bengaluru',
     period: '2021 – 2023',
-    details: 'Computer Science, Economics, Business Studies, and Accountancy.'
+    details: 'Computer Science, Mathematics, Physics, and foundational computing principles.'
   }
 ];
 

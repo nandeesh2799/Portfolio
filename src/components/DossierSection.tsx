@@ -71,7 +71,7 @@ export const DossierSection = forwardRef<HTMLElement, SectionProps>(
                 <GraduationCap className="w-4 h-4" />
                 <span>EDUCATION_HISTORY.log</span>
               </span>
-              <span className="text-[10px] text-muted">2 ENTRIES</span>
+              <span className="text-[10px] text-muted">{educationData.length} ENTRIES</span>
             </div>
 
             <div className="p-5 space-y-6 bg-bg-card/70">
