@@ -56,6 +56,24 @@ export const artworksData: Artwork[] = [
     description: 'Lord Shiva in deep cosmic meditation, painted with galaxy-blue watercolour washes, celestial starfields, and a crescent moon.',
     palette: ['#0077B6', '#00F5FF', '#03045E', '#CAF0F8']
   },
+  {
+    id: 'krishna-watercolour',
+    src: '/images/artworks/krishna-watercolour.jpg',
+    title: 'Krishna',
+    category: 'Paintings',
+    medium: 'Watercolour & Ink on Sketchbook',
+    description: 'Young Krishna adorned with peacock feathers and gold jewellery, rendered in delicate watercolour washes with clean ink outlines.',
+    palette: ['#00B4D8', '#FFB703', '#38B000', '#F8F9FA']
+  },
+  {
+    id: 'portrait-watercolour',
+    src: '/images/artworks/portrait-watercolour.jpg',
+    title: 'Portrait Study',
+    category: 'Paintings',
+    medium: 'Watercolour on Paper',
+    description: 'Expressive portrait capturing a joyful smile with subtle shading and fine hair detailing.',
+    palette: ['#E07A5F', '#3D405B', '#F4F1DE', '#81B29A']
+  },
 
   // ── Fabric Art ─────────────────────────────────────────
   {
@@ -80,24 +98,6 @@ export const artworksData: Artwork[] = [
   },
 
   // ── Sketches ───────────────────────────────────────────
-  {
-    id: 'krishna-watercolour',
-    src: '/images/artworks/krishna-watercolour.jpg',
-    title: 'Krishna',
-    category: 'Sketches',
-    medium: 'Watercolour & Ink on Sketchbook',
-    description: 'Young Krishna adorned with peacock feathers and gold jewellery, rendered in delicate watercolour washes with clean ink outlines.',
-    palette: ['#00B4D8', '#FFB703', '#38B000', '#F8F9FA']
-  },
-  {
-    id: 'portrait-watercolour',
-    src: '/images/artworks/portrait-watercolour.jpg',
-    title: 'Portrait Study',
-    category: 'Sketches',
-    medium: 'Watercolour on Paper',
-    description: 'Expressive portrait capturing a joyful smile with subtle shading and fine hair detailing.',
-    palette: ['#E07A5F', '#3D405B', '#F4F1DE', '#81B29A']
-  },
   {
     id: 'aghor-shiva-pen',
     src: '/images/artworks/aghor-shiva-pen.jpg',
